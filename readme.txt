@@ -19,7 +19,12 @@ No user interaction is required, simply install and activate to use this plugin.
 
 == Installation ==
 
-= Don't worry, it's really very easy... =
+= If you you install the plugin via your WordPress blog =
+1. Click 'Install Now' underneith the plugin name
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Job done!
+
+= If you download from http://wordpress.org/plugins/ =
 
 1. Upload the folder `admin-bar-button` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
