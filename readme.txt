@@ -19,7 +19,7 @@ No user interaction is required, simply install and activate to use this plugin.
 
 == Installation ==
 
-= If you you install the plugin via your WordPress blog =
+= If you install the plugin via your WordPress blog =
 1. Click 'Install Now' underneith the plugin name
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Job done!
