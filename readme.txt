@@ -21,7 +21,7 @@ No user interaction is required, simply install and activate to use this plugin.
 
 = Don't worry, it's really very easy... =
 
-1. Upload the folder `djg-admin-bar-button` to the `/wp-content/plugins/` directory
+1. Upload the folder `admin-bar-button` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. That's it!
 
@@ -74,7 +74,9 @@ are defaults and can be removed if you do not wish to change them.
 * Minor changes to the adminBar jQuery UI widget
 
 = 1.2.4 =
-* Critical updates to the readme file
+* Addition of screen shots
+* Updats to the FAQ's
+* Important update to the installation instrustions
 
 == Upgrade Notice ==
 
