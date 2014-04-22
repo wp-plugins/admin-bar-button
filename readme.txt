@@ -59,6 +59,11 @@ are defaults and can be removed if you do not wish to change them.
 * **bar_duration**		> The length of time (in miliseconds) to take to show/hide the admin menu
 * **show_time**			> The length of time (in miliseconds) to show the admin bar for
 
+== Screenshots ==
+
+1. The minimised Admin Bar Button, shown when the Admin Bar is not active.
+2. The regular Admin Bar, as shown here, is still available when the Admin Bar Button is hovered over.
+
 == Changelog ==
 
 = 1.2.1 =
