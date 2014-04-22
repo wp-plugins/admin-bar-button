@@ -19,9 +19,7 @@ No user interaction is required, simply install and activate to use this plugin.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
+= Don't worry, it's really very easy... =
 
 1. Upload the folder `djg-admin-bar-button` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
