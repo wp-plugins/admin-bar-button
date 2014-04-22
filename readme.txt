@@ -3,7 +3,7 @@ Contributors: duck__boy
 Tags: admin bar
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,19 +64,22 @@ are defaults and can be removed if you do not wish to change them.
 
 == Changelog ==
 
-= 1.2.1 =
-* First release on the WordPress repository
-
-= 1.2.2 =
-* Minor changes to function names to avoid possible clashes
-
-= 1.2.3 =
-* Minor changes to the adminBar jQuery UI widget
+= 1.2.5 =
+* Minor bug fix to the adminBar jQuery UI widget
 
 = 1.2.4 =
 * Addition of screen shots
 * Updats to the FAQ's
 * Important update to the installation instrustions
+
+= 1.2.3 =
+* Minor changes to the adminBar jQuery UI widget
+
+= 1.2.2 =
+* Minor changes to function names to avoid possible clashes
+
+= 1.2.1 =
+* First release on the WordPress repository
 
 == Upgrade Notice ==
 
