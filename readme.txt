@@ -79,4 +79,4 @@ as you wish them to be.
 
 == Upgrade Notice ==
 
-The latest version includes an admin munu (Settings -> Admin Bar Button) where you can customise your Admin Bar Button.
+The latest version includes an admin munu (Settings -> Admin Bar Button), allowing you to customise your Admin Bar Button.
