@@ -3,7 +3,7 @@ Contributors: duck__boy
 Tags: admin bar
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 1.2.5
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,7 +57,7 @@ as you wish them to be.
 
 == Changelog ==
 
-= 2.1 =
+= 2.0.1 =
 * New admin menu available for setting Admin Bar Button options; now there is no need to edit any JS or PHP to get the button the way you want it.
 
 = 1.2.5 =
@@ -79,4 +79,4 @@ as you wish them to be.
 
 == Upgrade Notice ==
 
-The latest version includes an admi munu (Settings -> Admin Bar Button) where you can customise your Admin Bar Button.
+The latest version includes an admin munu (Settings -> Admin Bar Button) where you can customise your Admin Bar Button.
