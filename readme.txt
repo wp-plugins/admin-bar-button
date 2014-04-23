@@ -66,8 +66,12 @@ are defaults and can be removed if you do not wish to change them.
 
 1. The minimised Admin Bar Button, shown when the Admin Bar is not active.
 2. The regular Admin Bar, as shown here, is still available when the Admin Bar Button is hovered over.
+3. The plugin settings page.
 
 == Changelog ==
+
+= 2.1 =
+* New admin menu available for setting Admin Bar Button options; now there is no need to edit any JS or PHP to get the button the way you want it.
 
 = 1.2.5 =
 * Minor bug fix to the adminBar jQuery UI widget
@@ -88,4 +92,4 @@ are defaults and can be removed if you do not wish to change them.
 
 == Upgrade Notice ==
 
-Any previous version that is installed will be a beta, so you should upgrade immediatly to a stable version.
+The latest version includes an admi munu (Settings -> Admin Bar Button) where you can customise your Admin Bar Button.
