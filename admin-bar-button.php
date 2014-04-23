@@ -37,6 +37,18 @@ endif;
 include_once('page.php');
 
 /**
+ * Add links underneith the plugin name on the plugins page
+ */
+$plugin = plugin_basename(__FILE__);
+add_filter('plugin_action_links_'.$plugin, 'on_plugin_action_links');
+function on_plugin_action_links($links){
+
+	$links[] = '<a href="options-general.php?page=djg-admin-bar-button">Settings</a>';
+	return $links;
+	
+}
+
+/**
  * Enqueue any necessary admin scripts/styeles
  */
 add_action('wp_enqueue_scripts', '_abb_enqueue_scripts');

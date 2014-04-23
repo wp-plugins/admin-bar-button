@@ -34,22 +34,9 @@ No user interaction is required, simply install and activate to use this plugin.
 
 = Can I change how the Admin Bar Button looks and works? =
 
-Yes, there are several settings that you can alter if you so wish. Copy the code below in to a
-suitable JS file in your theme and change the values as required.  Note that the values below
-are defaults and can be removed if you do not wish to change them.
-
-`$(document).ready(function(){
-	$('#wpadminbar').adminBar({
-		text:				'Admin bar',
-		text_direction:		'ltr',
-		button_position:	'left',
-		button_direction:	'left',
-		button_duration:	500,
-		bar_direction:		'right',
-		bar_duration:		500,
-		show_time:			5000
-	);
-});`
+Yes, there are several settings that you can alter if you so wish. To do this, simply
+visit the plugin settings page at '**Settings -> Admin Bar Button**' and set the options
+as you wish them to be.
 
 = What do all of the options mean? =
 

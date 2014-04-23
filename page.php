@@ -14,10 +14,11 @@ if(!function_exists('add_action')) :
 	exit();
 endif;
 
+/** Initiate the plugin options page */
 $abb_page = new ABB_Page();
 
 /**
- * Admin Bar Button options
+ * Admin Bar Button options page class
  */
 class ABB_Page{
 	
@@ -57,7 +58,12 @@ class ABB_Page{
 		
 	}
 	
+	/**
+	 * Output the necessary JS in the head of the front end (when the user is logged in)
+	 */
 	public function on_wp_head(){
+	
+		if(is_user_logged_in()) :
 ?>
 <script type="text/javascript">
 /** The options to use for displaying the Admin Bar Button */
@@ -73,6 +79,8 @@ var djg_admin_bar_button_options = {
 }
 </script>
 <?php
+		endif;
+
 	}
 	
 	/**
@@ -96,25 +104,26 @@ var djg_admin_bar_button_options = {
 	public function on_admin_init(){
 	
 		register_setting(
-			'admin_bar_button_group',	// Group name
-			'admin_bar_button',			// Option name
+			'admin_bar_button_group',			// Group name
+			'admin_bar_button',					// Option name
 			array(&$this, 'on_save_settings')	// Sanatize options callback
 		);
 		
 		
-		/**
-		 * Admin Bar Button settings
-		 */
+		/*-----------------------------------------------
+		  Admin Bar Button settings
+		-----------------------------------------------*/
+		
 		add_settings_section(
             'abb_button_section',										// ID
             __('How should the button work?', 'djg-admin-bar-button'),	// Title
-            array($this, 'do_button_section_info'),						// Callback
+            array($this, 'do_info_button_section'),						// Callback
             'djg_admin_bar_button'										// Page
         );
 		
 		add_settings_field(
             'text',										// ID
-            'Button Text',								// Title
+            __('Button Text', 'djg-admin-bar-button'),	// Title
             array($this, '_option_button_text'),		// Callback
             'djg_admin_bar_button',						// Page
             'abb_button_section',						// Section
@@ -124,63 +133,64 @@ var djg_admin_bar_button_options = {
         );
 		
 		add_settings_field(
-            'text_direction',							// ID
-            'Text Direction',					// Title
-            array($this, '_option_text_direction'),		// Callback
-            'djg_admin_bar_button',						// Page
-            'abb_button_section',						// Section
-			array(										// Args
+            'text_direction',
+            __('Text Direction', 'djg-admin-bar-button'),
+            array($this, '_option_text_direction'),
+            'djg_admin_bar_button',
+            'abb_button_section',
+			array(
 				'label_for' => 'text_direction'
 			) 
         );
 		
 		add_settings_field(
-            'button_position',							// ID
-            'Position on the Screen',					// Title
-            array($this, '_option_button_position'),	// Callback
-            'djg_admin_bar_button',						// Page
-            'abb_button_section',						// Section
-			array(										// Args
+            'button_position',
+            __('Position on the Screen', 'djg-admin-bar-button'),
+            array($this, '_option_button_position'),
+            'djg_admin_bar_button',
+            'abb_button_section',
+			array(
 				'label_for' => 'button_position'
 			) 
         );
 		
 		add_settings_field(
-            'button_direction',							// ID
-            'Direction',								// Title
-            array($this, '_option_button_direction'),	// Callback
-            'djg_admin_bar_button',						// Page
-            'abb_button_section',						// Section
-			array(										// Args
+            'button_direction',
+            __('Direction', 'djg-admin-bar-button'),
+            array($this, '_option_button_direction'),
+            'djg_admin_bar_button',
+            'abb_button_section',
+			array(
 				'label_for' => 'button_direction'
 			) 
         );
 		
 		add_settings_field(
-            'button_duration',							// ID
-            'Duration',									// Title
-            array($this, '_option_button_duration'),	// Callback
-            'djg_admin_bar_button',						// Page
-            'abb_button_section',						// Section
-			array(										// Args
+            'button_duration',
+            __('Duration', 'djg-admin-bar-button'),
+            array($this, '_option_button_duration'),
+            'djg_admin_bar_button',
+            'abb_button_section',
+			array(
 				'label_for' => 'button_duration'
 			) 
         );
 		
 		
-		/**
-		 * Admin Bar settings
-		 */
+		/*-----------------------------------------------
+		  Admin Bar settings
+		-----------------------------------------------*/
+		
 		add_settings_section(
             'abb_bar_section',												// ID
             __('What about the Amdin Bar itself?', 'djg-admin-bar-button'),	// Title
-            array($this, 'do_bar_section_info'),							// Callback
+            array($this, 'do_info_bar_section'),							// Callback
             'djg_admin_bar_button'											// Page
         );
 		
 		add_settings_field(
             'bar_direction',							// ID
-            'Direction',								// Title
+            __('Direction', 'djg-admin-bar-button'),	// Title
             array($this, '_option_bar_direction'),		// Callback
             'djg_admin_bar_button',						// Page
             'abb_bar_section',							// Section
@@ -190,30 +200,31 @@ var djg_admin_bar_button_options = {
         );
 		
 		add_settings_field(
-            'bar_duration',								// ID
-            'Duration',									// Title
-            array($this, '_option_bar_duration'),		// Callback
-            'djg_admin_bar_button',						// Page
-            'abb_bar_section',							// Section
-			array(										// Args
+            'bar_duration',
+            __('Duration', 'djg-admin-bar-button'),
+            array($this, '_option_bar_duration'),
+            'djg_admin_bar_button',
+            'abb_bar_section',
+			array(
 				'label_for' => 'bar_duration'
 			) 
         );
 		
 		
-		/**
-		 * General settings
-		 */
+		/*-----------------------------------------------
+		  General settings
+		-----------------------------------------------*/
+		
 		add_settings_section(
             'abb_general_section',														// ID
             __('And finnally just one general settings...', 'djg-admin-bar-button'),	// Title
-            array($this, 'do_general_section_info'),									// Callback
+            array($this, 'do_info_general_section'),									// Callback
             'djg_admin_bar_button'														// Page
         );
 		
 		add_settings_field(
             'show_time',								// ID
-            'Show Time',								// Title
+            __('Show Time', 'djg-admin-bar-button'),	// Title
             array($this, '_option_show_time'),			// Callback
             'djg_admin_bar_button',						// Page
             'abb_general_section',						// Section
@@ -234,8 +245,6 @@ var djg_admin_bar_button_options = {
 		
 			<h2><?php _e('Admin Bar Button Settings', 'djg-admin-bar-button'); ?></h2>
 			
-			<?php //$this->splash_message() ?>
-			
 			<form action="options.php" method="post">
 			
 				<?php settings_fields('admin_bar_button_group'); ?>
@@ -247,6 +256,9 @@ var djg_admin_bar_button_options = {
 <?php
 	}
 	
+	/**
+	 * Sanitize the option on save
+	 */
 	public function on_save_settings($input){
 	
 		$this->set_defaults();			// Set the default options
@@ -301,12 +313,18 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
+	/**
+	 * Set the $options, grabbed from the 'wp_options' DB table
+	 */
 	private function set_options(){
 	
 		$this->options = get_option('admin_bar_button');
 		
 	}
 	
+	/**
+	 * Set the default values, used if a value is not set when the 'on_show_page' or 'on_save_settings' methods are called
+	 */
 	private function set_defaults(){
 	
 		$this->dafaults = array(
@@ -322,6 +340,11 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
+	/**
+	 * Set the options that are available for each of the <select> elements
+	 *
+	 * @param string $scope	The set of options to return
+	 */
 	private function set_select_options($scope = null){
 	
 		$this->select_options = array(
@@ -349,41 +372,63 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
-	public function do_button_section_info(){
+	/**
+	 * The information to display for the Admin Bar Button options
+	 */
+	public function do_info_button_section(){
 	
 		echo '<p>These options relate to the Admin Bar Button that is shown in place of the Admin Bar.</p>';
 		echo '<p>You can control what the button text says and the text direction, as well as where the button is positioned how it\'s hidden and how long it takes to hide.</p>';
 		
 	}
 	
-	public function do_bar_section_info(){
+	/**
+	 * The information to display for the Admin Bar options
+	 */
+	public function do_info_bar_section(){
 	
 		echo '<p>These options relate to how the Admin Bar is shown and how long it takes to show.</p>';
 		
 	}
 	
-	public function do_general_section_info(){
+	/**
+	 * The information to display for the general options
+	 */
+	public function do_info_general_section(){
 	
 		echo '<p>Here you can set some general options, such as how long the Admin Bar remains visible for when shown.</p>';
 		
 	}
 	
+	/**
+	 * Output an option of the $type specified
+	 *
+	 * @param required string $type	The type of option to output
+	 * @parma required string $id	The ID of the option that is to be output
+	 * @param array $args			The arguments to use for the option that is to be output
+	 */
 	private function do_option($type, $id, $args = array()){
 	
 		switch($type) :
 		
 			case 'text' :
-				$this->do_text_input($id, $args);
+				$this->do_option_text($id, $args);
 				break;
 			case 'select' :
-				$this->do_select($id, $args);
+				$this->do_option_select($id, $args);
 				break;
 		
 		endswitch;
 		
 	}
 	
-	private function do_text_input($id, $args = array()){
+	/**
+	 * Output a text <input> option
+	 *
+	 * @parma required string $id	The ID of the option that is to be output
+	 * @param array $args			The arguments to use for the option that is to be output
+	 */
+	private function do_option_text($id, $args = array()){
 	
 		$defaults = array(
 			'name'		=> '',
@@ -410,7 +455,13 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
-	private function do_select($id, $args = array()){
+	/**
+	 * Output a <select> option
+	 *
+	 * @parma required string $id	The ID of the option that is to be output
+	 * @param array $args			The arguments to use for the option that is to be output
+	 */
+	private function do_option_select($id, $args = array()){
 	
 		$defaults = array(
 			'name'		=> '',
@@ -455,6 +506,9 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
+	/**
+	 * Callback for outputting the 'text' option
+	 */
 	public function _option_button_text(){
 	
 		$value = $this->get_value('text');	// Get the value currently saved for this option
@@ -470,6 +524,9 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
+	/**
+	 * Callback for outputting the 'text_direction' option
+	 */
 	public function _option_text_direction(){
 	
 		$options = $this->select_options['text_direction'];	// Get the valid options for this setting
@@ -488,6 +545,9 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
+	/**
+	 * Callback for outputting the 'button_position' option
+	 */
 	public function _option_button_position(){
 	
 		$options = $this->select_options['button_position'];	// Get the valid options for this setting
@@ -506,6 +566,9 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
+	/**
+	 * Callback for outputting the 'button_direction' option
+	 */
 	public function _option_button_direction(){
 	
 		$options = $this->select_options['button_direction'];	// Get the valid options for this setting
@@ -524,6 +587,9 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
+	/**
+	 * Callback for outputting the 'button_duration' option
+	 */
 	public function _option_button_duration(){
 	
 		$value = $this->get_value('button_duration');	// Get the value currently saved for this option
@@ -540,6 +606,9 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
+	/**
+	 * Callback for outputting the 'bar_direction' option
+	 */
 	public function _option_bar_direction(){
 	
 		$options = $this->select_options['bar_direction'];	// Get the valid options for this setting
@@ -558,6 +627,9 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
+	/**
+	 * Callback for outputting the 'bar_duration' option
+	 */
 	public function _option_bar_duration(){
 	
 		$value = $this->get_value('bar_duration');	// Get the value currently saved for this option
@@ -574,6 +646,9 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
+	/**
+	 * Callback for outputting the 'show_time' option
+	 */
 	public function _option_show_time(){
 	
 		$value = $this->get_value('show_time');	// Get the value currently saved for this option
@@ -590,13 +665,17 @@ var djg_admin_bar_button_options = {
 		
 	}
 	
-	private function get_value($field){
+	/**
+	 * Get the value of an option, checking first for a saved setting and then taking the default
+	 *
+	 * @param required string $option	The option to get a value for
+	 * @return mixed					The value for the selected option
+	 */
+	private function get_value($option){
 	
-		return isset($this->options[$field]) ? $this->options[$field] : $this->dafaults[$field];
+		return isset($this->options[$option]) ? $this->options[$option] : $this->dafaults[$option];
 		
 	}
 	
 }
-
-
 ?>
