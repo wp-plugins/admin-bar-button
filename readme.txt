@@ -58,24 +58,18 @@ as you wish them to be.
 
 == Changelog ==
 
-= 2.0.1 =
+= 2.0 =
 * New admin menu available for setting Admin Bar Button options; now there is no need to edit any JS or PHP to get the button the way you want it.
-
-= 1.2.5 =
 * Minor bug fix to the adminBar jQuery UI widget
 
-= 1.2.4 =
+= 1.1 =
+* Minor changes to function names to avoid possible clashes
+* Minor changes to the adminBar jQuery UI widget
 * Addition of screen shots
 * Updats to the FAQ's
 * Important update to the installation instrustions
 
-= 1.2.3 =
-* Minor changes to the adminBar jQuery UI widget
-
-= 1.2.2 =
-* Minor changes to function names to avoid possible clashes
-
-= 1.2.1 =
+= 1.0 =
 * First release on the WordPress repository
 
 == Upgrade Notice ==
