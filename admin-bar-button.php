@@ -3,7 +3,7 @@
  * Plugin Name: Admin Bar Button
  * Description: Hide the front end admin bar and replace it with an 'Admin bar' button. When you hover over the button, the bar appears and stays for as long as your mouse hovers over it (it'll disappear 5 seconds after you move the mouse away).
  * Author: David Gard
- * Version: 2.0.1
+ * Version: 2.1
  * Text Domain: djg-admin-bar-button
  *
  * Copyright 2014 David Gard.
@@ -46,39 +46,4 @@ function on_plugin_action_links($links){
 	$links[] = '<a href="options-general.php?page=djg-admin-bar-button">Settings</a>';
 	return $links;
 	
-}
-
-/**
- * Enqueue any necessary admin scripts/styeles
- */
-add_action('wp_enqueue_scripts', '_abb_enqueue_scripts');
-function _abb_enqueue_scripts(){
-	
-	global $wp_styles;
-	
-	/** Enqueue the JS required scripts */
-	wp_enqueue_script('jquery-ui-widget');
-	wp_enqueue_script('jquery-effects-slide');
-	wp_enqueue_script('djg-admin-bar', plugins_url('adminBar.js?scope=admin-bar-button', __FILE__ ), array('jquery-ui-widget', 'jquery-effects-slide'));
-	
-	/** Enqueue the required CSS */
-	wp_enqueue_style('djg-admin-bar', plugins_url('adminBar.css?scope=admin-bar-button', __FILE__ ));
-	
-}
-
-/**
- * Make sure that the admin bar does not add any margin to the top of the <body>
- */
-add_theme_support('admin-bar', array('callback' => 'abb_display'));
-function abb_display(){
-?>
-<style>
-body{
-	margin-top: 0;
-}
-#wpadminbar{
-	display: none;
-}
-</style>
-<?php
 }

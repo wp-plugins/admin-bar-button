@@ -48,9 +48,10 @@ class ABB_Page{
 	 */
 	public function __construct(){
 	
-		add_action('wp_head', array(&$this, 'on_wp_head'));			// Output the option values into the header
-		add_action('admin_menu', array(&$this, 'on_admin_menu'));	// Admin menu setup
-		add_action('admin_init', array(&$this, 'on_admin_init'));	// Register the admin settings
+		add_action('wp_enqueue_scripts', array(&$this, 'on_wp_enqueue_scripts'), 5);	// Enqueue the necessary front end scripts/styeles
+		add_action('wp_head', array(&$this, 'on_wp_head'));								// Output the necessary CSS/JS directly into the head of the front end
+		add_action('admin_menu', array(&$this, 'on_admin_menu'));						// Add the Admin Bar Button options Settings menu
+		add_action('admin_init', array(&$this, 'on_admin_init'));						// Register the settings that can be saved by this plugin
 		
 		$this->set_options();			// Set the currently saved options
 		$this->set_defaults();			// Set the default options
@@ -59,7 +60,18 @@ class ABB_Page{
 	}
 	
 	/**
-	 * Output the necessary JS in the head of the front end (when the user is logged in)
+	 * Enqueue the necessary front end scripts/styeles
+	 */
+	function on_wp_enqueue_scripts(){
+		
+		/** Enqueue the required scripts/styles */
+		wp_enqueue_script('djg-admin-bar', plugins_url('adminBar.js?scope=admin-bar-button', __FILE__ ), array('jquery-ui-widget', 'jquery-effects-slide'));
+		wp_enqueue_style('djg-admin-bar', plugins_url('adminBar.css?scope=admin-bar-button', __FILE__ ));
+		
+	}
+	
+	/**
+	 * Output the necessary CSS/JS directly into the head of the front end
 	 */
 	public function on_wp_head(){
 	
@@ -67,7 +79,7 @@ class ABB_Page{
 ?>
 <script type="text/javascript">
 /** The options to use for displaying the Admin Bar Button */
-var djg_admin_bar_button_options = {
+var djg_admin_bar_button = {
 	text:				'<?php echo $this->get_value('text') ?>',
 	text_direction:		'<?php echo $this->get_value('text_direction') ?>',
 	button_position:	'<?php echo $this->get_value('button_position') ?>',
@@ -79,12 +91,19 @@ var djg_admin_bar_button_options = {
 }
 </script>
 <?php
+		else :
+?>
+<script type="text/javascript">
+/** Don't display the Admin Bar Button (as no user is logged in) */
+var djg_admin_bar_button = false
+</script>
+<?php
 		endif;
 
 	}
 	
 	/**
-	 * Add the Admin Bar Button options admin menu
+	 * Add the Admin Bar Button options Settings menu
 	 */
 	public function on_admin_menu(){
 	
@@ -117,7 +136,7 @@ var djg_admin_bar_button_options = {
 		add_settings_section(
             'abb_button_section',										// ID
             __('How should the button work?', 'djg-admin-bar-button'),	// Title
-            array($this, 'do_info_button_section'),						// Callback
+            false,														// Callback
             'djg_admin_bar_button'										// Page
         );
 		
@@ -156,7 +175,7 @@ var djg_admin_bar_button_options = {
 		
 		add_settings_field(
             'button_direction',
-            __('Direction', 'djg-admin-bar-button'),
+            __('Slide Direction', 'djg-admin-bar-button'),
             array($this, '_option_button_direction'),
             'djg_admin_bar_button',
             'abb_button_section',
@@ -167,7 +186,7 @@ var djg_admin_bar_button_options = {
 		
 		add_settings_field(
             'button_duration',
-            __('Duration', 'djg-admin-bar-button'),
+            __('Slide Duration', 'djg-admin-bar-button'),
             array($this, '_option_button_duration'),
             'djg_admin_bar_button',
             'abb_button_section',
@@ -184,24 +203,24 @@ var djg_admin_bar_button_options = {
 		add_settings_section(
             'abb_bar_section',												// ID
             __('What about the Amdin Bar itself?', 'djg-admin-bar-button'),	// Title
-            array($this, 'do_info_bar_section'),							// Callback
+            false,															// Callback
             'djg_admin_bar_button'											// Page
         );
 		
 		add_settings_field(
-            'bar_direction',							// ID
-            __('Direction', 'djg-admin-bar-button'),	// Title
-            array($this, '_option_bar_direction'),		// Callback
-            'djg_admin_bar_button',						// Page
-            'abb_bar_section',							// Section
-			array(										// Args
+            'bar_direction',								// ID
+            __('Slide Direction', 'djg-admin-bar-button'),	// Title
+            array($this, '_option_bar_direction'),			// Callback
+            'djg_admin_bar_button',							// Page
+            'abb_bar_section',								// Section
+			array(											// Args
 				'label_for' => 'bar_direction'
 			) 
         );
 		
 		add_settings_field(
             'bar_duration',
-            __('Duration', 'djg-admin-bar-button'),
+            __('Slide Duration', 'djg-admin-bar-button'),
             array($this, '_option_bar_duration'),
             'djg_admin_bar_button',
             'abb_bar_section',
@@ -210,25 +229,13 @@ var djg_admin_bar_button_options = {
 			) 
         );
 		
-		
-		/*-----------------------------------------------
-		  General settings
-		-----------------------------------------------*/
-		
-		add_settings_section(
-            'abb_general_section',														// ID
-            __('And finnally just one general settings...', 'djg-admin-bar-button'),	// Title
-            array($this, 'do_info_general_section'),									// Callback
-            'djg_admin_bar_button'														// Page
-        );
-		
 		add_settings_field(
-            'show_time',								// ID
-            __('Show Time', 'djg-admin-bar-button'),	// Title
-            array($this, '_option_show_time'),			// Callback
-            'djg_admin_bar_button',						// Page
-            'abb_general_section',						// Section
-			array(										// Args
+            'show_time',
+            __('Show Time', 'djg-admin-bar-button'),
+            array($this, '_option_show_time'),
+            'djg_admin_bar_button',
+            'abb_bar_section',
+			array(
 				'label_for' => 'show_time'
 			) 
         );
@@ -236,7 +243,7 @@ var djg_admin_bar_button_options = {
 	}
 	
 	/**
-	 * Render the page
+	 * Render the plugin page
 	 */
 	public function on_show_page(){
 	
@@ -373,34 +380,6 @@ var djg_admin_bar_button_options = {
 	}
 	
 	/**
-	 * The information to display for the Admin Bar Button options
-	 */
-	public function do_info_button_section(){
-	
-		echo '<p>These options relate to the Admin Bar Button that is shown in place of the Admin Bar.</p>';
-		echo '<p>You can control what the button text says and the text direction, as well as where the button is positioned how it\'s hidden and how long it takes to hide.</p>';
-		
-	}
-	
-	/**
-	 * The information to display for the Admin Bar options
-	 */
-	public function do_info_bar_section(){
-	
-		echo '<p>These options relate to how the Admin Bar is shown and how long it takes to show.</p>';
-		
-	}
-	
-	/**
-	 * The information to display for the general options
-	 */
-	public function do_info_general_section(){
-	
-		echo '<p>Here you can set some general options, such as how long the Admin Bar remains visible for when shown.</p>';
-		
-	}
-	
-	/**
 	 * Output an option of the $type specified
 	 *
 	 * @param required string $type	The type of option to output
@@ -432,21 +411,23 @@ var djg_admin_bar_button_options = {
 	
 		$defaults = array(
 			'name'		=> '',
-			'value'		=> false
+			'value'		=> false,
+			'class'		=> ''
 		);
-		$args = wp_parse_args($args, $default);
+		$args = wp_parse_args($args, $defaults);
 		extract($args, EXTR_OVERWRITE);
 		
 		$name = ($name !== '') ? $name : $id;
 		
 		printf(
-			"\n\t".'<input type="text" id="%1$s" class="regular-text" name="%2$s" value="%3$s" />'."\n",
-			$id,	/** %1$s - The ID of the select */
-			$name,	/** %2$s - The name of the select */
-			$value	/** %3$s - The value of the option */
+			"\n\t".'<input type="text" id="%1$s" class="%2$s" name="%3$s" value="%4$s" />'."\n",
+			$id,	/** %1$s - The ID of the input */
+			$class,	/** %2$s - The class of the input */
+			$name,	/** %3$s - The name of the select */
+			$value	/** %4$s - The value of the option */
 		);
 		
-		if(isset($description)) :
+		if($description) :
 			printf(
 				"\n\t".'<p class="description">%1$s</p>'."\n",
 				$description	/** %1$s - A brief description of the option */
@@ -464,11 +445,14 @@ var djg_admin_bar_button_options = {
 	private function do_option_select($id, $args = array()){
 	
 		$defaults = array(
-			'name'		=> '',
-			'options'	=> array(),
-			'selected'	=> false,
+			'name'			=> '',
+			'options'		=> array(),
+			'selected'		=> false,
+			'class'			=> '',
+			'optgroup'		=> 'Select an option',
+			'description'	=> false
 		);
-		$args = wp_parse_args($args, $default);
+		$args = wp_parse_args($args, $defaults);
 		extract($args, EXTR_OVERWRITE);
 		
 		$name = ($name !== '') ? $name : $id;
@@ -476,10 +460,18 @@ var djg_admin_bar_button_options = {
 		if(!empty($options)) :
 		
 			printf(
-				"\n\t".'<select id="%1$s" class="regular-text" name="%2$s">'."\n",
+				"\n\t".'<select id="%1$s" class="$2$s" name="%3$s">'."\n",
 				$id,	/** %1$s - The ID of the select */
-				$name	/** %2$s - The name of the select */
+				$class,	/** %2$s - The class of the select */
+				$name	/** %3$s - The name of the select */
 			);
+			
+			if($optgroup) :
+				printf(
+					'<optgroup label="%1$s">',
+					$optgroup	/** %1$s - The title of the Option Group for this set of options */
+				);
+			endif;
 			
 			foreach($options as $option => $text) :
 			
@@ -493,11 +485,15 @@ var djg_admin_bar_button_options = {
 				
 			endforeach;
 			
+			if($optgroup) :
+				echo '</optgroup>';
+			endif;
+			
 			echo "\t".'</select>'."\n";
 			
 		endif;
 		
-		if(isset($description)) :
+		if($description) :
 			printf(
 				"\n\t".'<p class="description">%1$s</p>'."\n",
 				$description	/** %1$s - A brief description of the option */
@@ -518,7 +514,8 @@ var djg_admin_bar_button_options = {
 			'text',				// ID
 			array(				// Args
 				'name'			=> 'admin_bar_button[text]',
-				'value'			=> $value
+				'value'			=> $value,
+				'class'	=> 'regular-text'
 			)
 		);
 		
@@ -538,8 +535,7 @@ var djg_admin_bar_button_options = {
 			array(				// Args
 				'name'			=> 'admin_bar_button[text_direction]',
 				'options'		=> $options,
-				'selected'		=> $selected,
-				'description'	=> 'The direction of the Admin Bar Button text.'
+				'selected'		=> $selected
 			)
 		);
 		
@@ -559,8 +555,7 @@ var djg_admin_bar_button_options = {
 			array(				// Args
 				'name'			=> 'admin_bar_button[button_position]',
 				'options'		=> $options,
-				'selected'		=> $selected,
-				'description'	=> 'The position on the screen of the Admin Bar Button.'
+				'selected'		=> $selected
 			)
 		);
 		
@@ -581,7 +576,7 @@ var djg_admin_bar_button_options = {
 				'name'			=> 'admin_bar_button[button_direction]',
 				'options'		=> $options,
 				'selected'		=> $selected,
-				'description'	=> 'The side of the screen from which the Admin Bar Button will exit (and enter).'
+				'description'	=> __('The side of the screen from which the Admin Bar Button will exit (and enter).', 'djg-admin-bar-button')
 			)
 		);
 		
@@ -600,7 +595,8 @@ var djg_admin_bar_button_options = {
 			array(				// Args
 				'name'			=> 'admin_bar_button[button_duration]',
 				'value'			=> $value,
-				'description'	=> 'The time (in miliseconds) that it taks for the Admin Bar Button to slide off of (and on to) the screen.'
+				'class'	=> 'regular-text',
+				'description'	=> __('The time (in milliseconds) that it takes for the Admin Bar Button to slide off of (and on to) the screen.', 'djg-admin-bar-button')
 			)
 		);
 		
@@ -621,7 +617,7 @@ var djg_admin_bar_button_options = {
 				'name'			=> 'admin_bar_button[bar_direction]',
 				'options'		=> $options,
 				'selected'		=> $selected,
-				'description'	=> 'The side of the screen from which the Admin Bar will enter (and exit).'
+				'description'	=> __('The side of the screen from which the Admin Bar will enter (and exit).', 'djg-admin-bar-button')
 			)
 		);
 		
@@ -640,7 +636,8 @@ var djg_admin_bar_button_options = {
 			array(				// Args
 				'name'			=> 'admin_bar_button[bar_duration]',
 				'value'			=> $value,
-				'description'	=> 'The time (in miliseconds) that it taks for the Admin Bar to slide on to (and off of) the screen.'
+				'class'	=> 'regular-text',
+				'description'	=> __('The time (in milliseconds) that it takes for the Admin Bar to slide on to (and off of) the screen.', 'djg-admin-bar-button')
 			)
 		);
 		
@@ -659,7 +656,8 @@ var djg_admin_bar_button_options = {
 			array(				// Args
 				'name'			=> 'admin_bar_button[show_time]',
 				'value'			=> $value,
-				'description'	=> 'The time (in miliseconds) that the Admin Bar will be visible for, when shown.'
+				'class'	=> 'regular-text',
+				'description'	=> __('The time (in milliseconds) that the Admin Bar will be visible for, when shown.', 'djg-admin-bar-button')
 			)
 		);
 		

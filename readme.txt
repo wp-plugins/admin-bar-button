@@ -1,9 +1,9 @@
 === Admin Bar Button ===
 Contributors: duck__boy
-Tags: admin bar
+Tags: admin-bar, admin, bar, duck__boy
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 2.0.1
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,16 +11,17 @@ Replace the default WordPress admin bar on the front end with a simple button.
 
 == Description ==
 
-Replace the default WordPress admin bar on the front end with a simple button.
+Admin Bar Button is a plugin that will create a simple button to replace the default WordPress admin bar on the front end.
+When using this plugin, the full height of the page is used by your site, which is particularly handy if you have fixed headers.
+Please see the [Screenshots tab](http://wordpress.org/plugins/admin-bar-button/screenshots/ "Admin Bar Button &raquo; Screenshots") to see how the Admin Bar Button looks.
 
-When using this plugin, the full page height is used by your site so fixed headers work correctly.
-
-No user interaction is required, simply install and activate to use this plugin.
+After activating the plugin, if you wish you can change how the Admin Bar Button looks and works by visiting the **Settings** page (*Settings &raquo; Admin Bar Button*).
+However, **no user interaction is required** by the plugin; if you wish, you can simply install and activate Admin Bar Button and it'll work right away.
 
 == Installation ==
 
 = If you install the plugin via your WordPress blog =
-1. Click 'Install Now' underneith the plugin name
+1. Click 'Install Now' underneath the plugin name
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Job done!
 
@@ -40,14 +41,19 @@ as you wish them to be.
 
 = What do all of the options mean? =
 
-* **text**				> The text to display in the button
-* **text_direction**	> The direction of the text ('ltr' or 'rtl')
-* **button_position**	> Where to place the button ('left' or 'right')
-* **button_direction**	> The direction that the 'Show admin bar' button sldes on/off the screen ('up', 'down', 'left' or 'right')
-* **button_duration**	> The lenght of time (in miliseconds) to take to show/hide the 'Show admin menu' button
-* **bar_direction**		> The direction that the WordPress admin bar sldes on/off the screen ('up', 'down', 'left' or 'right')
-* **bar_duration**		> The length of time (in miliseconds) to take to show/hide the admin menu
-* **show_time**			> The length of time (in miliseconds) to show the admin bar for
+***The Admin Bar Button***
+
+* **Button Text**		> The text to display in the Admin Bar Button
+* **Text Direction**		> The direction of the Admin Bar Button text
+* **Position on the Screen**	> Where on the screen to position the Admin Bar Button
+* **Slide Direction**		> The side of the screen from which the Admin Bar Button will exit (and enter)
+* **Slide Duration**		> The time (in milliseconds) that it takes for the Admin Bar Button to slide off of (and on to) the screen
+
+***The Admin Bar***
+
+* **Slide Direction**		> The side of the screen from which the Admin Bar will enter (and exit)
+* **Slide Duration**		> The time (in milliseconds) that it takes for the Admin Bar to slide on to (and off of) the screen
+* **Show Time**			> The time (in milliseconds) that the Admin Bar will be visible for, when shown
 
 == Screenshots ==
 
@@ -57,6 +63,11 @@ as you wish them to be.
 
 == Changelog ==
 
+= 2.1 =
+* **Critical Fix** - Fix a possible JS error when a visitor to the site is not logged in
+* Creation a text domain for future foreign language support
+* Updates to the FAQ's
+
 = 2.0.1 =
 * New admin menu available for setting Admin Bar Button options; now there is no need to edit any JS or PHP to get the button the way you want it.
 
@@ -65,8 +76,8 @@ as you wish them to be.
 
 = 1.2.4 =
 * Addition of screen shots
-* Updats to the FAQ's
-* Important update to the installation instrustions
+* Updates to the FAQ's
+* Important update to the installation instructions
 
 = 1.2.3 =
 * Minor changes to the adminBar jQuery UI widget
@@ -79,4 +90,4 @@ as you wish them to be.
 
 == Upgrade Notice ==
 
-The latest version includes an admin munu (Settings -> Admin Bar Button), allowing you to customise your Admin Bar Button.
+The latest version fixes a possible JS error when non-logged in users are visiting your website.

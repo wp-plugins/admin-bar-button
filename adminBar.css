@@ -4,6 +4,13 @@
  * @Description:	CSS for the 'adminBar' jQuery widget
  */
 
+body{
+	margin-top: 0;
+}
+#wpadminbar{
+	display: none;
+}
+
 .dd-show-admin-bar{
 	background-color: 	#222222;
 	color: 				#EEEEEE;
@@ -24,7 +31,7 @@
 .dd-show-admin-bar span.ab-icon-position-left,
 .dd-show-admin-bar span.ab-icon-position-right{
 	font-family: 	"dashicons";
-	line-height: 32px;
+	line-height: 	32px;
 }
 .dd-show-admin-bar span.ab-icon-position-left:before{
 	content: 		"\f344";

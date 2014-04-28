@@ -247,14 +247,17 @@ $(function(){
  * Invoke the 'adminBar' widget, hiding the WordPress admin bar and showing a more subtle button
  */
 $(document).ready(function(){
-	$('#wpadminbar').adminBar({
-		text:               djg_admin_bar_button_options.text,
-        text_direction:     djg_admin_bar_button_options.text_direction,
-        button_position:    djg_admin_bar_button_options.button_position,
-        button_direction:   djg_admin_bar_button_options.button_direction,
-        button_duration:    djg_admin_bar_button_options.button_duration,
-        bar_direction:      djg_admin_bar_button_options.bar_direction,
-        bar_duration:       djg_admin_bar_button_options.bar_duration,
-        show_time:          djg_admin_bar_button_options.show_time
-	});
+	
+	if(djg_admin_bar_button !== false){
+		$('#wpadminbar').adminBar({
+			text:               djg_admin_bar_button.text,
+			text_direction:     djg_admin_bar_button.text_direction,
+			button_position:    djg_admin_bar_button.button_position,
+			button_direction:   djg_admin_bar_button.button_direction,
+			button_duration:    djg_admin_bar_button.button_duration,
+			bar_direction:      djg_admin_bar_button.bar_direction,
+			bar_duration:       djg_admin_bar_button.bar_duration,
+			show_time:          djg_admin_bar_button.show_time
+		});
+	}
 });
