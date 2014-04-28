@@ -1,0 +1,83 @@
+=== Admin Bar Button ===
+Contributors: duck__boy
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DPCXL86N299A
+Tags: admin bar
+Requires at least: 3.8
+Tested up to: 3.9
+Stable tag: 2.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Replace the default WordPress admin bar on the front end with a simple button.
+
+== Description ==
+
+Replace the default WordPress admin bar on the front end with a simple button.
+
+When using this plugin, the full page height is used by your site so fixed headers work correctly.
+
+No user interaction is required, simply install and activate to use this plugin.
+
+== Installation ==
+
+= If you install the plugin via your WordPress blog =
+1. Click 'Install Now' underneith the plugin name
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Job done!
+
+= If you download from http://wordpress.org/plugins/ =
+
+1. Upload the folder `admin-bar-button` to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. That's it!
+
+== Frequently Asked Questions ==
+
+= Can I change how the Admin Bar Button looks and works? =
+
+Yes, there are several settings that you can alter if you so wish. To do this, simply
+visit the plugin settings page at '**Settings -> Admin Bar Button**' and set the options
+as you wish them to be.
+
+= What do all of the options mean? =
+
+* **text**				> The text to display in the button
+* **text_direction**	> The direction of the text ('ltr' or 'rtl')
+* **button_position**	> Where to place the button ('left' or 'right')
+* **button_direction**	> The direction that the 'Show admin bar' button sldes on/off the screen ('up', 'down', 'left' or 'right')
+* **button_duration**	> The lenght of time (in miliseconds) to take to show/hide the 'Show admin menu' button
+* **bar_direction**		> The direction that the WordPress admin bar sldes on/off the screen ('up', 'down', 'left' or 'right')
+* **bar_duration**		> The length of time (in miliseconds) to take to show/hide the admin menu
+* **show_time**			> The length of time (in miliseconds) to show the admin bar for
+
+== Screenshots ==
+
+1. The minimised Admin Bar Button, shown when the Admin Bar is not active.
+2. The regular Admin Bar, as shown here, is still available when the Admin Bar Button is hovered over.
+3. The plugin settings page.
+
+== Changelog ==
+
+= 2.0.1 =
+* New admin menu available for setting Admin Bar Button options; now there is no need to edit any JS or PHP to get the button the way you want it.
+
+= 1.2.5 =
+* Minor bug fix to the adminBar jQuery UI widget
+
+= 1.2.4 =
+* Addition of screen shots
+* Updats to the FAQ's
+* Important update to the installation instrustions
+
+= 1.2.3 =
+* Minor changes to the adminBar jQuery UI widget
+
+= 1.2.2 =
+* Minor changes to function names to avoid possible clashes
+
+= 1.2.1 =
+* First release on the WordPress repository
+
+== Upgrade Notice ==
+
+The latest version includes an admin munu (Settings -> Admin Bar Button), allowing you to customise your Admin Bar Button.
