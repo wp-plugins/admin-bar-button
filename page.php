@@ -185,8 +185,8 @@ var djg_admin_bar_button = false
         );
 		
 		add_settings_field(
-            'button_duration (milliseconds)',
-            __('Slide Duration', 'djg-admin-bar-button'),
+            'button_duration',
+            __('Slide Duration (milliseconds)', 'djg-admin-bar-button'),
             array($this, '_option_button_duration'),
             'djg_admin_bar_button',
             'abb_button_section',
