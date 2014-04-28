@@ -70,23 +70,16 @@ are defaults and can be removed if you do not wish to change them.
 
 == Changelog ==
 
-= 1.2.5 =
-* Minor bug fix to the adminBar jQuery UI widget
-
-= 1.2.4 =
+= 1.1 =
+* Minor changes to function names to avoid possible clashes
+* Minor changes to the adminBar jQuery UI widget
 * Addition of screen shots
 * Updats to the FAQ's
 * Important update to the installation instrustions
 
-= 1.2.3 =
-* Minor changes to the adminBar jQuery UI widget
-
-= 1.2.2 =
-* Minor changes to function names to avoid possible clashes
-
-= 1.2.1 =
+= 1.0 =
 * First release on the WordPress repository
 
 == Upgrade Notice ==
 
-Any previous version that is installed will be a beta, so you should upgrade immediatly to a stable version.
+Stability upgrades to the jQuery UI widget element of the Admin Bar Button.
