@@ -185,7 +185,7 @@ var djg_admin_bar_button = false
         );
 		
 		add_settings_field(
-            'button_duration',
+            'button_duration (milliseconds)',
             __('Slide Duration', 'djg-admin-bar-button'),
             array($this, '_option_button_duration'),
             'djg_admin_bar_button',
@@ -220,7 +220,7 @@ var djg_admin_bar_button = false
 		
 		add_settings_field(
             'bar_duration',
-            __('Slide Duration', 'djg-admin-bar-button'),
+            __('Slide Duration (milliseconds)', 'djg-admin-bar-button'),
             array($this, '_option_bar_duration'),
             'djg_admin_bar_button',
             'abb_bar_section',
@@ -231,7 +231,7 @@ var djg_admin_bar_button = false
 		
 		add_settings_field(
             'show_time',
-            __('Show Time', 'djg-admin-bar-button'),
+            __('Show Time (milliseconds)', 'djg-admin-bar-button'),
             array($this, '_option_show_time'),
             'djg_admin_bar_button',
             'abb_bar_section',
@@ -515,7 +515,7 @@ var djg_admin_bar_button = false
 			array(				// Args
 				'name'			=> 'admin_bar_button[text]',
 				'value'			=> $value,
-				'class'	=> 'regular-text'
+				'class'			=> 'regular-text'
 			)
 		);
 		
@@ -595,8 +595,8 @@ var djg_admin_bar_button = false
 			array(				// Args
 				'name'			=> 'admin_bar_button[button_duration]',
 				'value'			=> $value,
-				'class'	=> 'regular-text',
-				'description'	=> __('The time (in milliseconds) that it takes for the Admin Bar Button to slide off of (and on to) the screen.', 'djg-admin-bar-button')
+				'class'			=> 'regular-text',
+				'description'	=> __('The time that it takes for the Admin Bar Button to slide off of (and on to) the screen.', 'djg-admin-bar-button')
 			)
 		);
 		
@@ -636,8 +636,8 @@ var djg_admin_bar_button = false
 			array(				// Args
 				'name'			=> 'admin_bar_button[bar_duration]',
 				'value'			=> $value,
-				'class'	=> 'regular-text',
-				'description'	=> __('The time (in milliseconds) that it takes for the Admin Bar to slide on to (and off of) the screen.', 'djg-admin-bar-button')
+				'class'			=> 'regular-text',
+				'description'	=> __('The time that it takes for the Admin Bar to slide on to (and off of) the screen.', 'djg-admin-bar-button')
 			)
 		);
 		
@@ -656,8 +656,8 @@ var djg_admin_bar_button = false
 			array(				// Args
 				'name'			=> 'admin_bar_button[show_time]',
 				'value'			=> $value,
-				'class'	=> 'regular-text',
-				'description'	=> __('The time (in milliseconds) that the Admin Bar will be visible for, when shown.', 'djg-admin-bar-button')
+				'class'			=> 'regular-text',
+				'description'	=> __('The time that the Admin Bar will be visible for, when shown.', 'djg-admin-bar-button')
 			)
 		);
 		
