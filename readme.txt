@@ -49,35 +49,19 @@ are defaults and can be removed if you do not wish to change them.
 
 = What do all of the options mean? =
 
-* **text**				> The text to display in the button
+* **text**		> The text to display in the button
 * **text_direction**	> The direction of the text ('ltr' or 'rtl')
 * **button_position**	> Where to place the button ('left' or 'right')
 * **button_direction**	> The direction that the 'Show admin bar' button sldes on/off the screen ('up', 'down', 'left' or 'right')
 * **button_duration**	> The lenght of time (in miliseconds) to take to show/hide the 'Show admin menu' button
-* **bar_direction**		> The direction that the WordPress admin bar sldes on/off the screen ('up', 'down', 'left' or 'right')
-* **bar_duration**		> The length of time (in miliseconds) to take to show/hide the admin menu
-* **show_time**			> The length of time (in miliseconds) to show the admin bar for
-
-== Screenshots ==
-
-1. The minimised Admin Bar Button, shown when the Admin Bar is not active.
-2. The regular Admin Bar, as shown here, is still available when the Admin Bar Button is hovered over.
+* **bar_direction**	> The direction that the WordPress admin bar sldes on/off the screen ('up', 'down', 'left' or 'right')
+* **bar_duration**	> The length of time (in miliseconds) to take to show/hide the admin menu
+* **show_time**		> The length of time (in miliseconds) to show the admin bar for
 
 == Changelog ==
 
-= 1.2.1 =
+= 1.0 =
 * First release on the WordPress repository
-
-= 1.2.2 =
-* Minor changes to function names to avoid possible clashes
-
-= 1.2.3 =
-* Minor changes to the adminBar jQuery UI widget
-
-= 1.2.4 =
-* Addition of screen shots
-* Updats to the FAQ's
-* Important update to the installation instrustions
 
 == Upgrade Notice ==
 
