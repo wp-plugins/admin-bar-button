@@ -1,5 +1,6 @@
 === Admin Bar Button ===
 Contributors: duck__boy
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DPCXL86N299A
 Tags: admin-bar, admin, bar, duck__boy
 Requires at least: 3.8
 Tested up to: 3.9
