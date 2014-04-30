@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin bar, admin, bar, jquery ui, jquery ui, widget factory, widget, factory, duck__boy
 Requires at least: 3.8
 Tested up to: 3.9
-Stable tag: 2.1
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,9 @@ as you wish them to be.
 3. The plugin settings page.
 
 == Changelog ==
+
+= 2.1.1 =
+* Fix error where sometimes the space originally ocupied by the admin bar was still being added to the page
 
 = 2.1 =
 * **Critical Fix** - Fix a possible JS error when a visitor to the site is not logged in

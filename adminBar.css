@@ -4,13 +4,6 @@
  * @Description:	CSS for the 'adminBar' jQuery widget
  */
 
-body{
-	margin-top: 0;
-}
-#wpadminbar{
-	display: none;
-}
-
 .dd-show-admin-bar{
 	background-color: 	#222222;
 	color: 				#EEEEEE;

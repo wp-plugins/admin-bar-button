@@ -3,7 +3,7 @@
  * Plugin Name: Admin Bar Button
  * Description: Hide the front end admin bar and replace it with an 'Admin bar' button. When you hover over the button, the bar appears and stays for as long as your mouse hovers over it (it'll disappear 5 seconds after you move the mouse away).
  * Author: David Gard
- * Version: 2.1
+ * Version: 2.1.1
  * Text Domain: djg-admin-bar-button
  *
  * Copyright 2014 David Gard.
@@ -40,8 +40,8 @@ include_once('page.php');
  * Add links underneith the plugin name on the plugins page
  */
 $plugin = plugin_basename(__FILE__);
-add_filter('plugin_action_links_'.$plugin, 'on_plugin_action_links');
-function on_plugin_action_links($links){
+add_filter('plugin_action_links_'.$plugin, 'abb_plugin_action_links');
+function abb_plugin_action_links($links){
 
 	$links[] = '<a href="options-general.php?page=djg-admin-bar-button">Settings</a>';
 	return $links;

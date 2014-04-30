@@ -48,10 +48,13 @@ class ABB_Page{
 	 */
 	public function __construct(){
 	
-		add_action('wp_enqueue_scripts', array(&$this, 'on_wp_enqueue_scripts'), 5);	// Enqueue the necessary front end scripts/styeles
-		add_action('wp_head', array(&$this, 'on_wp_head'));								// Output the necessary CSS/JS directly into the head of the front end
-		add_action('admin_menu', array(&$this, 'on_admin_menu'));						// Add the Admin Bar Button options Settings menu
-		add_action('admin_init', array(&$this, 'on_admin_init'));						// Register the settings that can be saved by this plugin
+		
+		
+		add_action('after_setup_theme', array(&$this, 'after_setup_theme'));		// Add the necessary theme support
+		add_action('wp_enqueue_scripts', array(&$this, 'on_wp_enqueue_scripts'));	// Enqueue the necessary front end scripts/styeles
+		add_action('wp_head', array(&$this, 'on_wp_head'));							// Output the necessary CSS/JS directly into the head of the front end
+		add_action('admin_menu', array(&$this, 'on_admin_menu'));					// Add the Admin Bar Button options Settings menu
+		add_action('admin_init', array(&$this, 'on_admin_init'));					// Register the settings that can be saved by this plugin
 		
 		$this->set_options();			// Set the currently saved options
 		$this->set_defaults();			// Set the default options
@@ -60,13 +63,39 @@ class ABB_Page{
 	}
 	
 	/**
+	 * Add the necessary theme support
+	 */
+	public function after_setup_theme(){
+	
+		/** Set the CSS to remove the space typically alocated to the admin bar */
+		add_theme_support('admin-bar', array('callback' => array(&$this, 'on_admin_bar')));
+		
+	}
+	
+	/**
+	 * Set the CSS to remove the space typically alocated to the admin bar
+	 */
+	public function on_admin_bar(){
+?>
+<style>
+body{
+	margin-top: 0;
+}
+#wpadminbar{
+	display: none;
+}
+</style>
+<?php
+	}
+	
+	/**
 	 * Enqueue the necessary front end scripts/styeles
 	 */
-	function on_wp_enqueue_scripts(){
+	public function on_wp_enqueue_scripts(){
 		
 		/** Enqueue the required scripts/styles */
 		wp_enqueue_script('djg-admin-bar', plugins_url('adminBar.js?scope=admin-bar-button', __FILE__ ), array('jquery-ui-widget', 'jquery-effects-slide'));
-		wp_enqueue_style('djg-admin-bar', plugins_url('adminBar.css?scope=admin-bar-button', __FILE__ ));
+		wp_enqueue_style('djg-admin-bar', plugins_url('adminBar.css?scope=admin-bar-button', __FILE__ ), 20);
 		
 	}
 	
