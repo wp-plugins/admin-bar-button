@@ -1,7 +1,7 @@
 === Admin Bar Button ===
 Contributors: duck__boy
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DPCXL86N299A
-Tags: admin-bar, admin, bar, duck__boy
+Tags: admin bar, admin, bar, jquery ui, jquery ui, widget factory, widget, factory, duck__boy
 Requires at least: 3.8
 Tested up to: 3.9
 Stable tag: 2.1
@@ -77,7 +77,7 @@ as you wish them to be.
 * Minor changes to function names to avoid possible clashes
 * Minor changes to the adminBar jQuery UI widget
 * Addition of screen shots
-* Updats to the FAQ's
+* Updates to the FAQ's
 * Important update to the installation instrustions
 
 = 1.0 =
