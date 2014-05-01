@@ -15,11 +15,11 @@ $(function(){
 			text:				'Admin bar',	// The text to display in the button
 			text_direction:		'ltr',			// The direction of the text ('ltr' or 'rtl')
 			button_position:	'left',			// Where to place the button ('left' or 'right')
-			button_direction:	'left',			// The direction that the 'Show admin bar' button sldes on/off the screen ('up', 'down', 'left' or 'right')
-			button_duration:	500,			// The lenght of time (in miliseconds) to take to show/hide the 'Show admin menu' button
+			button_direction:	'left',			// The direction that the Admin Bar Button sldes on/off the screen ('up', 'down', 'left' or 'right')
+			button_duration:	500,			// The lenght of time (in miliseconds) to take to show/hide the Admin Bar Button
 			bar_direction:		'right',		// The direction that the WordPress admin bar sldes on/off the screen ('up', 'down', 'left' or 'right')
-			bar_duration:		500,			// The length of time (in miliseconds) to take to show/hide the admin menu
-			show_time:			5000			// The length of time (in miliseconds) to show the admin bar for
+			bar_duration:		500,			// The length of time (in miliseconds) to take to show/hide the Admin Bar
+			show_time:			5000			// The length of time (in miliseconds) to show the Admin Bar for
 			
         }, // options
 	
@@ -45,7 +45,7 @@ $(function(){
 		}, // _create
 		
 		/**
-		 * Validate the selector that this instance of 'adminBar' was called upon and ensure it is the WordPress admin bar
+		 * Validate the selector that this instance of 'adminBar' was called upon and ensure it is the Admin Bar
 		 */
 		_validate_element : function(){
 		
@@ -79,14 +79,14 @@ $(function(){
 		 */
 		_format_button : function(){
 		
-			/** Work out if the 'Show admin bar' button should be shown on the left or the right */
+			/** Work out if the Admin Bar Button should be shown on the left or the right */
 			var left = (this.options.button_position === 'left') ? '0' : 'auto';
 			var right = (this.options.button_position === 'right') ? '0' : 'auto';
 			
-			/** Add text to the 'Show admin bar' button */
+			/** Add text to the Admin Bar Button */
 			this.button_text.html(this.options.text);
 			
-			/** Format the 'Show admin bar' button */
+			/** Format the Admin Bar Button */
 			this.button.css({
 				'background-repeat':	'repeat',
 				'height':				'32px',
@@ -97,7 +97,7 @@ $(function(){
 				'z-index':				'100000'
 			});
 			
-			/** Format the 'Show admin bar' button text */
+			/** Format the Admin Bar Button text */
 			var margin = '0 20px';
 			if(this.options.button_position === 'left'){
 				margin = '0 5px 0 20px';
@@ -118,15 +118,30 @@ $(function(){
 		
 			var t = this;	// This object
 			
-			/** Capture when the mouse is hovered over the 'Show admin bar' button */
-			t.button.on('mouseenter', function(e){
-				t._start_show_admin_bar_timeout();	// Restart the timout
-			});
+			/** Add the Admin Bar Button 'hover' ('mouseenter' and 'mouseleave') events */
+			if(t.options.button_activate === 'both' || t.options.button_activate === 'hover'){
 			
-			/** Capture when the mouse leaves the 'Show admin bar' button */
-			t.button.on('mouseleave', function(e){
-				t._clear_show_admin_bar_timeout();	// Clear the existing timeout
-			});
+				/** Capture when the mouse is hovered over the  Admin Bar Button */
+				t.button.on('mouseenter', function(e){
+					t._start_show_admin_bar_timeout();	// Restart the timout
+				});
+				
+				/** Capture when the mouse leaves the  Admin Bar Button */
+				t.button.on('mouseleave', function(e){
+					t._clear_show_admin_bar_timeout();	// Clear the existing timeout
+				});
+				
+			}
+			
+			/** Add the Admin Bar Button 'click' events */
+			if(t.options.button_activate === 'both' || t.options.button_activate === 'click'){
+			
+				/** Capture when the  Admin Bar Button is clicked */
+				t.button.on('click', function(e){
+					t._manage_show_admin_bar();	// Show the Admin Bar
+				});
+				
+			}
 			
 			/** Capture when the mouse is hovered over the WordPress admin bar */
 			t.element.on('mouseenter', function(e){
@@ -165,13 +180,9 @@ $(function(){
 			
 			this.timer_show_admin_bar = setTimeout(function(){
 				
-				var can_show = t._can_show();	// Whether or not the WordPress admin bar can currently be shown
+				var can_show = t._can_show();	// Whether or not the Admin Bar can currently be shown
 				if(can_show === true){
-				
-					t._show_admin_bar();				// Show the WordPress admin bar and hide the 'Show admin bar' button
-					t._start_hide_admin_bar_timeout();	// Start a new timeout (to hide the admin bar if it's not hovered on)
-					t._clear_show_admin_bar_timeout()	// Clear the timeout for showing the admin bar
-					
+					t._manage_show_admin_bar();
 				}
 				
 			}, 500);
@@ -179,7 +190,7 @@ $(function(){
 		}, // _timeout
 		
 		/**
-		 * Clear the timout that would otherwise show the WordPress admin bar
+		 * Clear the timout that would otherwise show the Admin Bar
 		 */
 		_clear_show_admin_bar_timeout : function(){
 		
@@ -188,7 +199,7 @@ $(function(){
 		}, // _clear_timeout
 		
 		/**
-		 * Setup a timeout to hide the WordPress admin bar (if the mouse does not move over it for 5 seconds)
+		 * Setup a timeout to hide the Admin Bar
 		 */
 		_start_hide_admin_bar_timeout : function(){
 		
@@ -196,7 +207,7 @@ $(function(){
 			
 			this.timer = setTimeout(function(){
 				
-				t._hide_admin_bar();				// Hide the WordPress admin bar and shwo the 'Show admin bar' button
+				t._hide_admin_bar();				// Hide the WordPress admin bar and shwo the Admin Bar Button
 				t._clear_hide_admin_bar_timeout();	// Clear the existing timeout
 				
 			}, t.options.show_time);
@@ -204,7 +215,7 @@ $(function(){
 		}, // _timeout
 		
 		/**
-		 * Clear the timout that would otherwise hide the WordPress admin bar
+		 * Clear the timout that would otherwise hide the Admin Bar
 		 */
 		_clear_hide_admin_bar_timeout : function(){
 		
@@ -213,27 +224,38 @@ $(function(){
 		}, // _clear_timeout
 		
 		/**
-		 * Show the WordPress admin bar (and hide the 'Show admin bar' button)
+		 * Manage the showing of the Admin Bar, including handeling all timeouts
+		 */
+		_manage_show_admin_bar : function(){
+		
+			this._show_admin_bar();					// Show the WordPress admin bar and hide the Admin Bar Button
+			this._start_hide_admin_bar_timeout();	// Start a new timeout (to hide the Admin Bar if it's not hovered on)
+			this._clear_show_admin_bar_timeout();	// Clear the timeout for showing the Admin Bar
+			
+		}, // _showing_admin_bar
+		
+		/**
+		 * Show the Admin Bar (and hide the Admin Bar Button)
 		 */
 		_show_admin_bar : function(){
 		
-			this._can_show(false);		// Set the 'can_show' object variable to 'false' (meaning the WordPress admin bar can not be shown again at present)
-			this.element.show('slide', { 'direction': this.options.bar_direction }, this.options.bar_duration);	// Show the WordPress admin bar
-			this.button.hide('slide', { 'direction': this.options.button_direction }, this.options.button_duration);	// Hide the 'Show admin bar' button
+			this._can_show(false);		// Set the 'can_show' object variable to 'false' (meaning the Admin Bar can not be shown again at present)
+			this.element.show('slide', { 'direction': this.options.bar_direction }, this.options.bar_duration);			// Show the Admin Bar
+			this.button.hide('slide', { 'direction': this.options.button_direction }, this.options.button_duration);	// Hide the Admin Bar Button
 			
 		}, // _show_admin_bar
 		
 		/**
-		 * Hide the WordPress admin bar (and show the 'Show admin bar' button)
+		 * Hide the WordPress admin bar (and show the Admin Bar Button)
 		 */
 		_hide_admin_bar : function(){
 		
 			var t = this;	// This object
 			
-			this.element.hide('slide', { 'direction': this.options.bar_direction }, this.options.bar_duration);				// Hide the WordPress admin bar
-			this.button.show('slide', { 'direction': this.options.button_direction }, this.options.button_duration, function(){	// Show the 'Show admin bar' button
+			this.element.hide('slide', { 'direction': this.options.bar_direction }, this.options.bar_duration);					// Hide the Admin Bar
+			this.button.show('slide', { 'direction': this.options.button_direction }, this.options.button_duration, function(){	// Show the Admin Bar Button
 			
-				t._can_show(true);	// Set the 'can_show' object variable to 'true' (meaning the WordPress admin bar can be shown again)
+				t._can_show(true);	// Set the 'can_show' object variable to 'true' (meaning the Admin Bar can be shown again)
 				
 			});
 			
@@ -255,6 +277,7 @@ $(document).ready(function(){
 			button_position:    djg_admin_bar_button.button_position,
 			button_direction:   djg_admin_bar_button.button_direction,
 			button_duration:    djg_admin_bar_button.button_duration,
+			button_activate:    djg_admin_bar_button.button_activate,
 			bar_direction:      djg_admin_bar_button.bar_direction,
 			bar_duration:       djg_admin_bar_button.bar_duration,
 			show_time:          djg_admin_bar_button.show_time

@@ -114,6 +114,7 @@ var djg_admin_bar_button = {
 	button_position:	'<?php echo $this->get_value('button_position') ?>',
 	button_direction:	'<?php echo $this->get_value('button_direction') ?>',
 	button_duration:	<?php echo $this->get_value('button_duration') ?>,
+	button_activate:	'<?php echo $this->get_value('button_activate') ?>',
 	bar_direction:		'<?php echo $this->get_value('bar_direction') ?>',
 	bar_duration:		<?php echo $this->get_value('bar_duration') ?>,
 	show_time:			<?php echo $this->get_value('show_time') ?>
@@ -224,6 +225,17 @@ var djg_admin_bar_button = false
 			) 
         );
 		
+		add_settings_field(
+            'button_activate',
+            __('Button Activated On', 'djg-admin-bar-button'),
+            array($this, '_option_button_activate'),
+            'djg_admin_bar_button',
+            'abb_button_section',
+			array(
+				'label_for' => 'button_activate'
+			) 
+        );
+		
 		
 		/*-----------------------------------------------
 		  Admin Bar settings
@@ -328,6 +340,11 @@ var djg_admin_bar_button = false
 			$new_input['button_duration'] = ($time > 0) ? $time : $this->defaults['button_duration'];
 		endif;
 		
+		/** Button activate */
+		if(isset($input['button_activate'])) :
+            $new_input['button_activate'] = (array_key_exists($input['button_activate'], $this->select_options['button_activate'])) ? $input['button_activate'] : $this->defaults['button_activate'];
+		endif;
+		
 		/** Bar direction */
 		if(isset($input['bar_direction'])) :
             $new_input['bar_direction'] = (array_key_exists($input['bar_direction'], $this->select_options['bar_direction'])) ? $input['bar_direction'] : $this->defaults['bar_direction'];
@@ -369,6 +386,7 @@ var djg_admin_bar_button = false
 			'button_position'	=> 'left',
 			'button_direction'	=> 'left',
 			'button_duration'	=> 500,
+			'button_activate'	=> 'both',
 			'bar_direction'		=> 'right',
 			'bar_duration'		=> 500,
 			'show_time'			=> 5000
@@ -397,6 +415,11 @@ var djg_admin_bar_button = false
 				'down'	=> __('Slide down', 'djg-admin-bar-button'),
 				'left'	=> __('Slide left', 'djg-admin-bar-button'),
 				'right'	=> __('Slide right', 'djg-admin-bar-button')
+			),
+			'button_activate'	=> array(
+				'both'	=> __('Click and hover', 'djg-admin-bar-button'),
+				'click'	=> __('Click', 'djg-admin-bar-button'),
+				'hover'	=> __('Hover', 'djg-admin-bar-button')
 			),
 			'bar_direction'	=> array(
 				'up'	=> __('Slide up', 'djg-admin-bar-button'),
@@ -606,6 +629,27 @@ var djg_admin_bar_button = false
 				'options'		=> $options,
 				'selected'		=> $selected,
 				'description'	=> __('The side of the screen from which the Admin Bar Button will exit (and enter).', 'djg-admin-bar-button')
+			)
+		);
+		
+	}
+	
+	/**
+	 * Callback for outputting the 'button_activate' option
+	 */
+	public function _option_button_activate(){
+	
+		$options = $this->select_options['button_activate'];	// Get the valid options for this setting
+		$selected = $this->get_value('button_activate');		// Get the value currently selected for this option
+		
+		$this->do_option(
+			'select',			// Option type
+			'button_activate',	// ID
+			array(				// Args
+				'name'			=> 'admin_bar_button[button_activate]',
+				'options'		=> $options,
+				'selected'		=> $selected,
+				'description'	=> __('The actions will activate the Admin Bar.', 'djg-admin-bar-button')
 			)
 		);
 		

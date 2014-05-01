@@ -64,6 +64,9 @@ as you wish them to be.
 
 == Changelog ==
 
+= 2.2 =
+* New option to choose which action upon the Admin Bar Button shows the Admin Bar; Click and hover, click, or hover
+
 = 2.1.1 =
 * Fix error where sometimes the space originally ocupied by the admin bar was still being added to the page
 
