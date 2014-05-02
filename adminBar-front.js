@@ -1,7 +1,7 @@
 /**
  * @package:		WordPress
  * @subpackage:		Admin Bar Button Plugin
- * @Description:	Custom jQuery UI 'adminBar' widget for implementing a sliding admin bar, and the invokation of the widget
+ * @description:	Custom jQuery UI 'adminBar' widget for implementing a sliding admin bar, and the invokation of the widget
  */
 
 $ = jQuery.noConflict();
@@ -13,13 +13,13 @@ $(function(){
 		options : {
 		
 			text:				'Admin bar',	// The text to display in the button
-			text_direction:		'ltr',			// The direction of the text ('ltr' or 'rtl')
-			button_position:	'left',			// Where to place the button ('left' or 'right')
-			button_direction:	'left',			// The direction that the Admin Bar Button sldes on/off the screen ('up', 'down', 'left' or 'right')
-			button_duration:	500,			// The lenght of time (in miliseconds) to take to show/hide the Admin Bar Button
-			bar_direction:		'right',		// The direction that the WordPress admin bar sldes on/off the screen ('up', 'down', 'left' or 'right')
-			bar_duration:		500,			// The length of time (in miliseconds) to take to show/hide the Admin Bar
-			show_time:			5000			// The length of time (in miliseconds) to show the Admin Bar for
+			text_direction:		'ltr',			// The direction of the text
+			button_position:	'top-left',		// Where to place the button
+			button_direction:	'left',			// The direction that the Admin Bar Button sldes on/off the screen
+			button_duration:	500,			// The length of time to take to show/hide the Admin Bar Button
+			bar_direction:		'right',		// The direction that the WordPress admin bar sldes on/off the screen
+			bar_duration:		500,			// The length of time to take to show/hide the Admin Bar
+			show_time:			5000			// The length of time to show the Admin Bar for
 			
         }, // options
 	
@@ -59,15 +59,15 @@ $(function(){
 		_create_layout : function(){
 			
 			/** Create the relevant DOM objects for the 'Show admin bar' button */
-            this.button = $('<div>').addClass('dd-show-admin-bar');
+            this.button = $('<div>').addClass('djg-admin-bar-button');
 			this.button_text = $('<span>').addClass('text');
 			this.button_icon = $('<span>').addClass('ab-icon-position-'+this.options.button_position);
 			
             /** Insert the 'Show admin bar' button in to the DOM */
             this.button.insertAfter(this.element);
-			if(this.options.button_position === 'right') this.button.append(this.button_icon);
+			if(this.options.button_position.indexOf('right') > -1) this.button.append(this.button_icon);
 			this.button.append(this.button_text);
-			if(this.options.button_position === 'left') this.button.append(this.button_icon);
+			if(this.options.button_position.indexOf('left') > -1) this.button.append(this.button_icon);
 			
             /** Format the 'Show admin bar' button */
             this._format_button();
@@ -80,8 +80,22 @@ $(function(){
 		_format_button : function(){
 		
 			/** Work out if the Admin Bar Button should be shown on the left or the right */
-			var left = (this.options.button_position === 'left') ? '0' : 'auto';
-			var right = (this.options.button_position === 'right') ? '0' : 'auto';
+			var top = (this.options.button_position.indexOf('top') > -1) ? '0' : 'auto';
+			var bottom = (this.options.button_position.indexOf('bottom') > -1) ? '0' : 'auto';
+			var left = (this.options.button_position.indexOf('left') > -1) ? '0' : 'auto';
+			var right = (this.options.button_position.indexOf('right') > -1) ? '0' : 'auto';
+			
+			/** If the Admin Bar Button is to be shown at the bottom of the screen, ensure the Admin Bar is alow shown there */
+			if(bottom === '0'){
+				this.element.css({
+					bottom:	'0',
+					top:	'auto'
+				});
+				
+				this.element.find('.ab-sub-wrapper').css({
+					bottom:	'32px'
+				});
+			}
 			
 			/** Add text to the Admin Bar Button */
 			this.button_text.html(this.options.text);
@@ -89,19 +103,20 @@ $(function(){
 			/** Format the Admin Bar Button */
 			this.button.css({
 				'background-repeat':	'repeat',
+				'bottom':				bottom,
 				'height':				'32px',
 				'position':				'fixed',
 				'left':					left,
 				'right':				right,
-				'top':					'0',
+				'top':					top,
 				'z-index':				'100000'
 			});
 			
 			/** Format the Admin Bar Button text */
 			var margin = '0 20px';
-			if(this.options.button_position === 'left'){
+			if(this.options.button_position.indexOf('left') > -1){
 				margin = '0 5px 0 20px';
-			} else if(this.options.button_position === 'right'){
+			} else if(this.options.button_position.indexOf('right') > -1){
 				margin = '0 20px 0 5px';
 			}
 			this.button_text.css({
@@ -239,9 +254,23 @@ $(function(){
 		 */
 		_show_admin_bar : function(){
 		
-			this._can_show(false);		// Set the 'can_show' object variable to 'false' (meaning the Admin Bar can not be shown again at present)
-			this.element.show('slide', { 'direction': this.options.bar_direction }, this.options.bar_duration);			// Show the Admin Bar
-			this.button.hide('slide', { 'direction': this.options.button_direction }, this.options.button_duration);	// Hide the Admin Bar Button
+			this._can_show(false);	// Set the 'can_show' object variable to 'false' (meaning the Admin Bar can not be shown again at present)
+			
+			/** Show the Admin Bar */
+			if(this.options.bar_duration > 0){
+				this.element.show('slide', { 'direction': this.options.bar_direction }, this.options.bar_duration);
+			}
+			else{
+				this.element.show();
+			}
+			
+			/** Hide the Admin Bar Button */
+			if(this.options.button_duration > 0){
+				this.button.hide('slide', { 'direction': this.options.button_direction }, this.options.button_duration);
+			}
+			else{
+				this.button.hide();
+			}
 			
 		}, // _show_admin_bar
 		
@@ -252,12 +281,24 @@ $(function(){
 		
 			var t = this;	// This object
 			
-			this.element.hide('slide', { 'direction': this.options.bar_direction }, this.options.bar_duration);					// Hide the Admin Bar
-			this.button.show('slide', { 'direction': this.options.button_direction }, this.options.button_duration, function(){	// Show the Admin Bar Button
+			/** Hide the Admin Bar */
+			if(this.options.bar_duration > 0){
+				this.element.hide('slide', { 'direction': this.options.bar_direction }, this.options.bar_duration);
+			}
+			else{
+				this.element.hide();
+			}
 			
-				t._can_show(true);	// Set the 'can_show' object variable to 'true' (meaning the Admin Bar can be shown again)
-				
-			});
+			/** Show the Admin Bar Button */
+			if(this.options.button_duration > 0){
+				this.button.show('slide', { 'direction': this.options.button_direction }, this.options.button_duration, function(){
+					t._can_show(true);	// Set the 'can_show' object variable to 'true' (meaning the Admin Bar can be shown again)
+				});
+			}
+			else{
+				this.button.show();
+				this._can_show(true);	// Set the 'can_show' object variable to 'true' (meaning the Admin Bar can be shown again)
+			}
 			
 		} // _hide_admin_bar
 		
@@ -271,6 +312,15 @@ $(function(){
 $(document).ready(function(){
 	
 	if(djg_admin_bar_button !== false){
+	
+		/**
+		 * As the 'button_position' options changes, ensure that the old options are accounted for
+		 *
+		 * @since 2.2
+		 */
+		if(djg_admin_bar_button.button_position === 'left') djg_admin_bar_button.button_position = 'top-left';
+		if(djg_admin_bar_button.button_position === 'right') djg_admin_bar_button.button_position = 'top-right';
+		
 		$('#wpadminbar').adminBar({
 			text:               djg_admin_bar_button.text,
 			text_direction:     djg_admin_bar_button.text_direction,
@@ -282,5 +332,6 @@ $(document).ready(function(){
 			bar_duration:       djg_admin_bar_button.bar_duration,
 			show_time:          djg_admin_bar_button.show_time
 		});
+		
 	}
 });

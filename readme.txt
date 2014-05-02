@@ -36,25 +36,52 @@ However, **no user interaction is required** by the plugin; if you wish, you can
 
 = Can I change how the Admin Bar Button looks and works? =
 
-Yes, there are several settings that you can alter if you so wish. To do this, simply
-visit the plugin settings page at '**Settings -> Admin Bar Button**' and set the options
-as you wish them to be.
+Yes, there are several settings that you can alter if you so wish.
+To do this, simply visit the **Settings** page (*Settings &raquo; Admin Bar Button*), set the options as you wish them to be and click **Save Changes**
 
 = What do all of the options mean? =
 
-***The Admin Bar Button***
+***The Admin Bar Button, added by this plugin***
 
-* **Button Text**		> The text to display in the Admin Bar Button
-* **Text Direction**		> The direction of the Admin Bar Button text
-* **Position on the Screen**	> Where on the screen to position the Admin Bar Button
-* **Slide Direction**		> The side of the screen from which the Admin Bar Button will exit (and enter)
-* **Slide Duration**		> The time (in milliseconds) that it takes for the Admin Bar Button to slide off of (and on to) the screen
+* **Button Text**		> The text to display in the Admin Bar Button. You can set this to anything you want, the button will resize appropriately.
+* **Text Direction**		> The direction of the Admin Bar Button text. Default is left-to-right, but you can use right-to-left if appropriate for you language.
+* **Position on the Screen**	> Where on the screen to position the Admin Bar Button. You can place the button in any of the four corners. If you choose 'Bottom left' or 'Bottom right' then the WordPress Admin Bar will also be shown on the bottom of the screen.
+* **Button Activated On**	> The actions that will activate the Admin Bar. Currently you can choose between when the user clicks the button, when they hover over it, or both.
+* **Slide Duration**		> The time (in milliseconds) that it takes for the Admin Bar Button to slide off of the screen (and back on to it when the WordPress Admin Bar is hidden again). Any positive value is acceptable, and setting it to '0' will disable the animation.
+* **Slide Direction**		> The direction from which the Admin Bar Button will slide off of the screen (and back on to it when the WordPress Admin Bar is hidden again). This option is irrelevant and so ignored if 'Slide Duration' is set to '0'.
 
-***The Admin Bar***
+***The WordPress Admin Bar***
 
-* **Slide Direction**		> The side of the screen from which the Admin Bar will enter (and exit)
-* **Slide Duration**		> The time (in milliseconds) that it takes for the Admin Bar to slide on to (and off of) the screen
-* **Show Time**			> The time (in milliseconds) that the Admin Bar will be visible for, when shown
+* **Slide Duration**		> The time (in milliseconds) that it takes for the WordPress Admin Bar to slide on to the screen (and back off of it when the Admin Bar Button is shown again). Any positive value is acceptable, and setting it to '0' will disable the animation.
+* **Slide Direction**		> The direction from which the WordPress Admin Bar will slide on to the screen (and back off of it when the Admin Bar Button is shown again). This option is irrelevant and so ignored if 'Slide Duration' is set to '0'.
+* **Show Time**			> The time (in milliseconds) that the Admin Bar will be visible for, when shown. The minimum time is 2000 (2 seconds), and setting this option to less than that will result in the default being used.
+
+= What are the option defaults? =
+
+***The Admin Bar Button, added by this plugin***
+
+* **Button Text**		> Admin bar
+* **Text Direction**		> Left to right
+* **Position on the Screen**	> Top left
+* **Button Activated On**	> Hover and click
+* **Slide Duration**		> 500 milliseconds (0.5 seconds)
+* **Slide Direction**		> Left
+
+***The WordPress Admin Bar***
+
+* **Slide Duration**		> 500 milliseconds (0.5 seconds)
+* **Slide Direction**		> Right
+* **Show Time**			> 5000 milliseconds (5 seconds)
+
+= Can I prevent the Admin Bar Button and/or the Admin Bar being animated when it is shown or hidden? =
+
+Yes, you simply have to set the **Slide Duration** option to **0**.
+There is a separate option for both the **Admin Bar Button** and the **Admin Bar**, so you can animate only one or the other if you so chose.
+
+= Can I restore the default settings? =
+
+Of course. Simply visit the **Settings** page (*Settings &raquo; Admin Bar Button*), scroll to the bottom and click **Restore Defaults**.
+You'll be asked to confirm that you wish to do this, and then all of the defaults will be restored.
 
 == Screenshots ==
 
@@ -66,6 +93,12 @@ as you wish them to be.
 
 = 2.2 =
 * New option to choose which action upon the Admin Bar Button shows the Admin Bar; Click and hover, click, or hover
+* The Admin Bar Button can now be positioned bottom left and bottom right, as well as top left and top right
+* The animation of the Admin Bar Button and the Admin Bar being shown/hidden is now optional
+* Contextual help added to the settings page
+* Added a 'Restore Defaults' button
+
+*Please visit the [FAQ tab](http://wordpress.org/plugins/admin-bar-button/faq/ "Admin Bar Button &raquo; "FAQ") if you have questions about the latest features.*
 
 = 2.1.1 =
 * Fix error where sometimes the space originally ocupied by the admin bar was still being added to the page
@@ -91,4 +124,4 @@ as you wish them to be.
 
 == Upgrade Notice ==
 
-The latest version fixes a possible JS error when non-logged in users are visiting your website.
+New options for positioning of the Admin Bar Button, and for disabling the animations.
