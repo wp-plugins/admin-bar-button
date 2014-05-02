@@ -1,0 +1,317 @@
+/**
+ * @package:		WordPress
+ * @subpackage:		Admin Admin Branding
+ */
+
+/*------------------------------------------------------------------------------
+
+TABLE OF CONTENTS:
+------------------
+ 1.0 - General
+ 2.0 - Safe containers
+ 3.0 - AJAX loaders
+ 4.0 - Custom branding forms
+
+------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+  1.0 - General
+------------------------------------------------------------------------------*/
+
+#admin-area-branding-page h3{
+    border-bottom: 1px solid #000000;
+	font-style: italic;
+	font-weight: bold;
+	margin: 30px 0 17px 0;
+	padding: 0 0 2px 0;
+}
+#admin-area-branding-page h3.first{
+	margin-top: 7px;
+}
+
+
+/*------------------------------------------------------------------------------
+  2.0 - Safe containers
+------------------------------------------------------------------------------*/
+
+#custom-admin-header-safe,
+#wpfooter-safe,
+#login-preview-dialog-safe{
+	display: none;
+}
+
+
+/*------------------------------------------------------------------------------
+  3.0 - AJAX
+------------------------------------------------------------------------------*/
+	
+	
+	/*------------------------------------------------------------------------------
+	  3.1 - Loading dialog
+	------------------------------------------------------------------------------*/
+	
+	#loading-dialog{
+		background-color: #FFFFFF;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+		display: none;
+		text-align: center;
+	}
+	
+	#loading-dialog-inside{
+		display: inline-block;
+		margin: 13px auto;
+	}
+	#loading-dialog-inside h2{
+		display: inline-block;
+		vertical-align: middle;
+	}
+	
+	#custom-admin-preview-spinner{
+		background-image: url('../ajax-spinner.gif');
+		display: inline-block;
+		height: 48px;
+		margin: 0 20px 0 0;
+		vertical-align: middle;
+		width: 48px;
+	}
+	
+
+	/*------------------------------------------------------------------------------
+	  3.2 - Login preview dialog
+	------------------------------------------------------------------------------*/
+
+	#custom-admin-login-preview-loader{
+		background-image: url('../ajax-loader.gif');
+		display: inline-block;
+		height: 17px;
+		left: 50%;
+		margin: -9px 0 0 -100px !important;
+		opacity: 0;
+		position: absolute;
+		top: 50%;
+		width: 200px;
+		vertical-align: middle;
+	}
+	
+
+	/*------------------------------------------------------------------------------
+	  3.3 - Preview images
+	------------------------------------------------------------------------------*/
+	
+	#admin-area-branding-page .custom-admin-logo-preview-loader{
+		background-image: url('../ajax-loader.gif');
+		display: inline-block;
+		height: 17px;
+		opacity: 0;
+		vertical-align: middle;
+		width: 200px;
+	}
+	
+	
+	/*------------------------------------------------------------------------------
+	  3.4 - Errors
+	------------------------------------------------------------------------------*/
+	
+	#message.custom-admin-message{
+		margin-top:		0;
+		margin-right:	20px;
+		margin-left:	2px;
+		padding: 		1px 12px;
+	}
+	#message.custom-admin-message.login{
+		margin:			0 6px;
+	}
+	#message.custom-admin-message p{
+		font-family: 	"Open Sans",sans-serif;
+		font-size:		13px;
+		margin:			0.5em 0;
+		padding:		2px;
+	}
+	#message.custom-admin-message a{
+		color: #0074A2;
+	}
+	#message.custom-admin-message a:hover{
+		color: #2EA2CC;
+	}
+	
+
+/*------------------------------------------------------------------------------
+  4.0 - Custom branding forms
+------------------------------------------------------------------------------*/
+
+
+#admin-area-branding-metabox .single-option{
+	margin-bottom: 10px;
+}
+
+	/*------------------------------------------------------------------------------
+	  4.1 - Labels
+	------------------------------------------------------------------------------*/
+	
+	#admin-area-branding-metabox .single-option label{
+		display: inline-block;
+		font-weight: bold;
+		margin-right: 10px;
+		text-align: right;
+	}
+	#admin-area-branding-metabox .single-option label.for-manage{
+		width: 187px;
+	}
+	#admin-area-branding-metabox .single-option label.for-header{
+		width: 145px;
+	}
+	#admin-area-branding-metabox .single-option label.for-footer{
+		width: auto;
+	}
+	#admin-area-branding-metabox .single-option label.for-login{
+		width: 181px;
+	}
+	#admin-area-branding-metabox .single-option label.for-textarea{
+		display: block;
+		margin-left: 3px;
+		text-align: left;
+		width: 397px;
+	}
+	
+	
+	/*------------------------------------------------------------------------------
+	  4.2 - Inputs, textareas and selects
+	------------------------------------------------------------------------------*/
+
+	#admin-area-branding-metabox .single-option input[type="text"].small{
+		width: 53px;
+	}
+	#admin-area-branding-metabox .single-option input[type="text"].tiny{
+		width: 36px;
+	}
+	#admin-area-branding-metabox .single-option textarea{
+		width: 400px;
+		height: 92px;
+	}
+	#admin-area-branding-metabox .single-option select{
+		width: 128px;
+	}
+	
+	
+	/*------------------------------------------------------------------------------
+	  4.3 - Input tips
+	------------------------------------------------------------------------------*/
+	
+
+	#admin-area-branding-metabox div.tips{
+		display: inline-block;
+		margin-left: 10px;
+		vertical-align: middle;
+	}
+	#admin-area-branding-metabox div.tips.no-margin{
+		margin-left: 0;
+	}
+	#admin-area-branding-metabox span.tip{
+		display: block;
+		font-style: italic;
+	}
+	#admin-area-branding-metabox span.tip span.title{
+		font-weight: bold;
+	}
+	
+	
+	/*------------------------------------------------------------------------------
+	  4.4 - jQuery spinners
+	------------------------------------------------------------------------------*/
+	
+	#admin-area-branding-metabox .ui-spinner{
+		height: 21px;
+		margin-right: 10px;
+	}
+	
+		/*------------------------------------------------------------------------------
+		  4.4.1 - Inline-spinner
+		------------------------------------------------------------------------------*/
+		
+		#admin-area-branding-metabox .ui-spinner .inline-spinner{
+			border: 0;
+			height: 21px;
+			margin: 0 !important;
+			padding: 3px 3px 4px 3px;
+		}
+		
+		
+		/*------------------------------------------------------------------------------
+		  4.4.2 - Block-spinner
+		------------------------------------------------------------------------------*/
+		
+		#admin-area-branding-metabox .ui-spinner-topbottom{
+			height: 39px;
+		}
+		#admin-area-branding-metabox .ui-spinner-topbottom .block-spinner{
+			border: 0;
+			height: 18px;
+			margin: 10px 0 !important;
+			padding: 0 3px;
+			text-align: center;
+		}
+		#admin-area-branding-metabox .ui-spinner-topbottom .ui-spinner-button{
+		   height: 10px;
+		   left: 0px;
+		   width: 100%;
+		} 
+		#admin-area-branding-metabox .ui-spinner-topbottom a.ui-spinner-button{
+		   border: none;
+		} 
+		#admin-area-branding-metabox .ui-spinner-topbottom .ui-icon{
+		   margin-left: -8px;
+		   top: 5px;
+		   left: 50%;
+		}
+		
+		
+	/*------------------------------------------------------------------------------
+	  4.5 - Manage images
+	------------------------------------------------------------------------------*/
+
+	#admin-area-branding-metabox .select-logo-button{
+		display: inline;
+		vertical-align: middle;
+	}
+	#admin-area-branding-metabox .remove-logo-button,
+	#admin-area-branding-metabox .restore-logo-button{
+		display: none;
+		margin-left: 10px;
+		opacity: 0;
+		vertical-align: middle;
+	}
+
+	#admin-area-branding-metabox #logo-preview-container{
+		display: none;
+	}
+	#admin-area-branding-metabox #logo-preview{
+		display: inline;
+		vertical-align: middle;
+	}
+	
+	
+	/*------------------------------------------------------------------------------
+	  4.6 - Dialogs
+	------------------------------------------------------------------------------*/
+	
+	#login-preview-dialog{
+		display: none;
+	}
+	
+	/*------------------------------------------------------------------------------
+	 4.7 - Manage form
+	------------------------------------------------------------------------------*/
+
+	#admin-area-branding-metabox .manage-form{
+		margin-top: 20px;
+	}
+	#admin-area-branding-metabox .manage-form input#preview-changes,
+	#admin-area-branding-metabox .manage-form input#preview-login{
+		margin-left: 10px;
+		vertical-align: middle;
+	}
+	#admin-area-branding-metabox .manage-form .restore-original-button{
+		display: none;
+		margin-left: 10px;
+		opacity: 0;
+	}

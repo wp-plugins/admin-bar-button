@@ -1,0 +1,186 @@
+/**
+ * @package:		WordPress
+ * @subpackage:		Admin Admin Branding
+ */
+
+/*------------------------------------------------------------------------------
+
+TABLE OF CONTENTS:
+------------------
+ 1.0 - Safe containers
+ 2.0 - AJAX loaders
+ 3.0 - Custom branding forms
+
+------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------
+  1.0 - Safe containers
+------------------------------------------------------------------------------*/
+
+#custom-admin-header-safe,
+#wpfooter-safe,
+#login-preview-dialog-safe{
+	display: none;
+}
+
+
+/*------------------------------------------------------------------------------
+  2.0 - AJAX
+------------------------------------------------------------------------------*/
+	
+	
+	/*------------------------------------------------------------------------------
+	  2.1 - Loading dialog
+	------------------------------------------------------------------------------*/
+	
+	#loading-dialog{
+		background-color: #FFFFFF;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+		display: none;
+		text-align: center;
+	}
+	
+	#loading-dialog-inside{
+		display: inline-block;
+		margin: 13px auto;
+	}
+	#loading-dialog-inside h2{
+		display: inline-block;
+		vertical-align: middle;
+	}
+	
+	#custom-admin-preview-spinner{
+		background-image: url('../ajax-spinner.gif');
+		display: inline-block;
+		height: 48px;
+		margin: 0 20px 0 0;
+		vertical-align: middle;
+		width: 48px;
+	}
+	
+
+	/*------------------------------------------------------------------------------
+	  2.2 - Login preview dialog
+	------------------------------------------------------------------------------*/
+
+	#custom-admin-login-preview-loader{
+		background-image: url('../ajax-loader.gif');
+		display: inline-block;
+		height: 17px;
+		left: 50%;
+		margin: -9px 0 0 -100px !important;
+		opacity: 0;
+		position: absolute;
+		top: 50%;
+		width: 200px;
+		vertical-align: middle;
+	}
+	
+
+	/*------------------------------------------------------------------------------
+	  2.3 - Preview images
+	------------------------------------------------------------------------------*/
+	
+	#admin-area-branding-page .custom-admin-logo-preview-loader{
+		background-image: url('../ajax-loader.gif');
+		display: inline-block;
+		height: 17px;
+		opacity: 0;
+		vertical-align: middle;
+		width: 200px;
+	}
+	
+	
+	/*------------------------------------------------------------------------------
+	  2.4 - Errors
+	------------------------------------------------------------------------------*/
+	
+	#message.custom-admin-message{
+		margin-top:		0;
+		margin-right:	20px;
+		margin-left:	2px;
+		padding: 		1px 12px;
+	}
+	#message.custom-admin-message.login{
+		margin:			0 6px;
+	}
+	#message.custom-admin-message p{
+		font-family: 	"Open Sans",sans-serif;
+		font-size:		13px;
+		margin:			0.5em 0;
+		padding:		2px;
+	}
+	#message.custom-admin-message a{
+		color: #0074A2;
+	}
+	#message.custom-admin-message a:hover{
+		color: #2EA2CC;
+	}
+	
+
+/*------------------------------------------------------------------------------
+  3.0 - Custom branding forms
+------------------------------------------------------------------------------*/
+	
+	/*------------------------------------------------------------------------------
+	  3.3 - Input tips
+	------------------------------------------------------------------------------*/
+	
+
+	#admin-area-branding-metabox div.tips{
+		display: inline-block;
+		margin-left: 10px;
+		vertical-align: middle;
+	}
+	#admin-area-branding-metabox div.tips.no-margin{
+		margin-left: 0;
+	}
+	#admin-area-branding-metabox span.tip{
+		display: block;
+		font-style: italic;
+	}
+	#admin-area-branding-metabox span.tip span.title{
+		font-weight: bold;
+	}
+		
+		
+	/*------------------------------------------------------------------------------
+	  4.5 - Manage images
+	------------------------------------------------------------------------------*/
+
+	#admin-area-branding-page .select-logo-button{
+		display: inline;
+		vertical-align: middle;
+	}
+	#admin-area-branding-page .remove-logo-button,
+	#admin-area-branding-page .restore-logo-button{
+		color:			#0074A2;
+		cursor:			pointer;
+		display:		none;
+		font-size:		13px;
+		line-height:	26px;
+		margin-left:	10px;
+		opacity:		0;
+	}
+	#admin-area-branding-page .remove-logo-button:hover,
+	#admin-area-branding-page .restore-logo-button:hover{
+		color:	#2EA2CC;
+	}
+
+	#admin-area-branding-page #logo-preview-container{
+		display: none;
+	}
+	#admin-area-branding-page #logo-preview{
+		display: inline;
+		vertical-align: middle;
+	}
+	
+	
+	/*------------------------------------------------------------------------------
+	  4.6 - Dialogs
+	------------------------------------------------------------------------------*/
+	
+	#login-preview-dialog{
+		display: none;
+	}

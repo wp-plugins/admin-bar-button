@@ -1,0 +1,56 @@
+/**
+ * @package:		WordPress
+ * @subpackage:		DJG Utilities Plugin
+ * @Description:	CSS for the custom jQuery UI 'switchButton' widget
+ */
+
+.djg-switch-button-container{
+	border-color:			#AAAAAA;
+	border-style:			solid;
+	border-width:			1px;
+	display:				none;
+	position:				relative;
+	vertical-align:			middle;
+	border-radius:			7px;
+	-moz-border-radius:		7px;
+	-webkit-border-radius:	7px;	
+}
+
+.djg-switch-button{
+	border-color:		#AAAAAA;
+	border-style:		solid;
+	border-width:		0;
+	position:			absolute;
+	top:				0;
+}
+.djg-switch-button.on{
+	border-right-width:					0;
+	border-left-width:					1px;
+	border-radius:						10px;
+	border-top-right-radius:			7px;
+	border-bottom-right-radius:			7px;
+	-moz-border-radius:					10px;
+	-moz-border-radius-topright:		7px;
+	-moz-border-radius-bottomright:		7px;
+	-webkit-border-radius:				10px;
+	-webkit-border-top-right-radius: 	7px;
+	-webkit-border-bottom-right-radius:	7px;
+}
+.djg-switch-button.off{
+	border-radius:						7px;
+	border-top-right-radius:			10px;
+	border-bottom-right-radius:			10px;
+	-moz-border-radius:					7px;
+	-moz-border-radius-topright:		10px;
+	-moz-border-radius-bottomright:		10px;
+	-webkit-border-radius:				7px;
+	-webkit-border-top-right-radius:	10px;
+	-webkit-border-bottom-right-radius:	10px;
+}
+
+.djg-switch-button-label{
+	font-size:		12px;
+	font-weight:	bold;
+	text-align:		center;
+	display: 		inline-block;
+}
