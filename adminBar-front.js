@@ -93,7 +93,8 @@ $(function(){
 				});
 				
 				this.element.find('.ab-sub-wrapper').css({
-					bottom:	'32px'
+					bottom:		'32px',
+					boxShadow:	'0 -3px 5px rgba(0, 0, 0, 0.2)'
 				});
 			}
 			
@@ -102,14 +103,14 @@ $(function(){
 			
 			/** Format the Admin Bar Button */
 			this.button.css({
-				'background-repeat':	'repeat',
-				'bottom':				bottom,
-				'height':				'32px',
-				'position':				'fixed',
-				'left':					left,
-				'right':				right,
-				'top':					top,
-				'z-index':				'100000'
+				backgroundRepeat:	'repeat',
+				bottom:				bottom,
+				height:				'32px',
+				position:			'fixed',
+				left:				left,
+				right:				right,
+				top:				top,
+				Zindex:				'100000'
 			});
 			
 			/** Format the Admin Bar Button text */
@@ -120,8 +121,8 @@ $(function(){
 				margin = '0 20px 0 5px';
 			}
 			this.button_text.css({
-				'direction':		this.options.text_direction,
-				'margin':			margin
+				direction:	this.options.text_direction,
+				margin:		margin
 			});
 			
 		}, // _format_layout

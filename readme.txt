@@ -8,11 +8,11 @@ Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Replace the default WordPress admin bar on the front end with a simple button.
+Replace the default WordPress Admin Bar on the front end with a simple button.
 
 == Description ==
 
-Admin Bar Button is a plugin that will create a simple button to replace the default WordPress admin bar on the front end.
+Admin Bar Button is a plugin that will create a simple button to replace the default WordPress Admin Bar on the front end.
 When using this plugin, the full height of the page is used by your site, which is particularly handy if you have fixed headers.
 Please see the [Screenshots tab](http://wordpress.org/plugins/admin-bar-button/screenshots/ "Admin Bar Button &raquo; Screenshots") to see how the Admin Bar Button looks.
 
@@ -92,35 +92,35 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 == Changelog ==
 
 = 2.2 =
-* New option to choose which action upon the Admin Bar Button shows the Admin Bar; Click and hover, click, or hover
-* The Admin Bar Button can now be positioned bottom left and bottom right, as well as top left and top right
-* The animation of the Admin Bar Button and the Admin Bar being shown/hidden is now optional
-* Contextual help added to the settings page
-* Added a 'Restore Defaults' button
+* New option to choose the action upon which Admin Bar Button shows the WordPress Admin Bar; click and hover, click, or hover.
+* The Admin Bar Button can now be positioned bottom left and bottom right, as well as top left and top right; the WordPress Admin Bar will aslo be moved to the bottom if the Admin Bar Button is placed there.
+* The animation of the Admin Bar Button and the Admin Bar being shown/hidden is now optional.
+* Contextual help added to the settings page.
+* Added a 'Restore Defaults' button.
 
 *Please visit the [FAQ tab](http://wordpress.org/plugins/admin-bar-button/faq/ "Admin Bar Button &raquo; "FAQ") if you have questions about the latest features.*
 
 = 2.1.1 =
-* Fix error where sometimes the space originally ocupied by the admin bar was still being added to the page
+* Fix error where sometimes the space originally ocupied by the admin bar was still being added to the page.
 
 = 2.1 =
-* **Critical Fix** - Fix a possible JS error when a visitor to the site is not logged in
-* Creation a text domain for future foreign language support
-* Updates to the FAQ's
+* **Critical Fix** - Fix a possible JS error when a visitor to the site is not logged in.
+* Creation a text domain for future foreign language support.
+* Updates to the FAQ's.
 
 = 2.0 =
 * New admin menu available for setting Admin Bar Button options; now there is no need to edit any JS or PHP to get the button the way you want it.
-* Minor bug fix to the adminBar jQuery UI widget
+* Minor bug fix to the adminBar jQuery UI widget.
 
 = 1.1 =
-* Minor changes to function names to avoid possible clashes
-* Minor changes to the adminBar jQuery UI widget
-* Addition of screen shots
-* Updates to the FAQ's
-* Important update to the installation instrustions
+* Minor changes to function names to avoid possible clashes.
+* Minor changes to the adminBar jQuery UI widget.
+* Addition of screen shots.
+* Updates to the FAQ's.
+* Important update to the installation instrustions.
 
 = 1.0 =
-* First release on the WordPress repository
+* First release on the WordPress repository.
 
 == Upgrade Notice ==
 

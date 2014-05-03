@@ -308,104 +308,30 @@ var djg_admin_bar_button = false
 		
 		$this->screen = get_current_screen();	// Grab the current screen
 		
-		$this->screen->set_help_sidebar(
-			'<p>'.
-				'<strong>' . __('For more information', 'djg-admin-bar-button') . ':</strong>'.
-			'</p>'.
-			'<p>'.
-				'<a href="http://wordpress.org/plugins/admin-bar-button/" title="' .  esc_attr__('Admin Bar Button', 'djg-admin-bar-button') . '">' . __('Visit the Plugin Page', 'djg-admin-bar-button') . '</a>'. 
-			'</p>'
-		);
+		$this->screen->set_help_sidebar($this->do_help_sidebar());
 		
 		$this->screen->add_help_tab(array(
 			'id'		=> 'description',
 			'title'		=> __('Description'),
-			'content'	=>
-				'<p>'.
-					__('Admin Bar Button is a plugin that will create a simple button to replace the default WordPress admin bar on the front end. ', 'djg-admin-bar-button').
-					__('When using this plugin, the full height of the page is used by your site, which is particularly handy if you have fixed headers.', 'djg-admin-bar-button').
-				'</p>'.
-				'<p>'.
-					__('Please see the ', 'djg-admin-bar-button').
-					'<a href="http://wordpress.org/plugins/admin-bar-button/screenshots/" title="' .  esc_attr__('Admin Bar Button &raquo; Screenshots', 'djg-admin-bar-button') . '">' . __('these screenshots', 'djg-admin-bar-button') . '</a>'. 
-					__(' to see how the Admin Bar Button looks.', 'djg-admin-bar-button').
-				'</p>'
+			'callback'	=> array(&$this, 'do_help_description')
 		));
 		
 		$this->screen->add_help_tab(array(
 			'id'		=> 'faq',
 			'title'		=> __('FAQ'),
-			'content'	=>
-				'<h3>' . __('What do all of the options mean?', 'djg-admin-bar-button') . '</h3>'.
-				'<p><strong><em>' . __('The Admin Bar Button, added by this plugin', 'djg-admin-bar-button') . '</em></strong></p>'.
-				'<ul>'.
-					'<li><strong>' . __('Button Text', 'djg-admin-bar-button') . '</strong>: ' . __('The text to display in the Admin Bar Button. You can set this to anything you want, the button will resize appropriately.', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Text Direction', 'djg-admin-bar-button') . '</strong>: ' . __('The direction of the Admin Bar Button text. Default is left-to-right, but you can use right-to-left if appropriate for you language.', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Position on the Screen', 'djg-admin-bar-button') . '</strong>: ' . __('Where on the screen to position the Admin Bar Button. You can place the button in any of the four corners. If you choose \'Bottom left\' or \'Bottom right\' then the WordPress Admin Bar will also be shown on the bottom of the screen.', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Button Activated On', 'djg-admin-bar-button') . '</strong>: ' . __('The actions that will activate the Admin Bar. Currently you can choose between when the user clicks the button, when they hover over it, or both.', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Slide Duration', 'djg-admin-bar-button') . '</strong>: ' . __('The time (in milliseconds) that it takes for the Admin Bar Button to slide off of the screen (and back on to it when the WordPress Admin Bar is hidden again). Any positive value is acceptable, and setting it to \'0\' will disable the animation.', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Slide Direction', 'djg-admin-bar-button') . '</strong>: ' . __('The direction from which the Admin Bar Button will slide off of the screen (and back on to it when the WordPress Admin Bar is hidden again). This option is irrelevant and so ignored if \'Slide Duration\' is set to \'0\'.', 'djg-admin-bar-button') .'</li>'.
-				'</ul>'.
-				'<p><strong><em>' . __('The WordPress Admin Bar', 'djg-admin-bar-button') . '</em></strong></p>'.
-				'<ul>'.
-					'<li><strong>' . __('Slide Duration', 'djg-admin-bar-button') . '</strong>: ' . __('The time (in milliseconds) that it takes for the WordPress Admin Bar to slide on to the screen (and back off of it when the Admin Bar Button is shown again). Any positive value is acceptable, and setting it to \'0\' will disable the animation.', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Slide Direction', 'djg-admin-bar-button') . '</strong>: ' . __('The direction from which the WordPress Admin Bar will slide on to the screen (and back off of it when the Admin Bar Button is shown again). This option is irrelevant and so ignored if \'Slide Duration\' is set to \'0\'.', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Show Time', 'djg-admin-bar-button') . '</strong>: ' . __('The time (in milliseconds) that the Admin Bar will be visible for, when shown. The minimum time is 2000 (2 seconds), and setting this option to less than that will result in the default being used.', 'djg-admin-bar-button') .'</li>'.
-				'</ul>'.
-				
-				'<h3>' . __('What do all of the options mean?', 'djg-admin-bar-button') . '</h3>'.
-				'<p><strong><em>' . __('The Admin Bar Button, added by this plugin', 'djg-admin-bar-button') . '</em></strong></p>'.
-				'<ul>'.
-					'<li><strong>' . __('Button Text', 'djg-admin-bar-button') . '</strong>: ' . __('Admin bar', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Text Direction', 'djg-admin-bar-button') . '</strong>: ' . __('Left to right', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Position on the Screen', 'djg-admin-bar-button') . '</strong>: ' . __('Top left', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Button Activated On', 'djg-admin-bar-button') . '</strong>: ' . __('Hover and click', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Slide Duration', 'djg-admin-bar-button') . '</strong>: ' . __('500 milliseconds (0.5 seconds)', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Slide Direction', 'djg-admin-bar-button') . '</strong>: ' . __('Left', 'djg-admin-bar-button') .'</li>'.
-				'</ul>'.
-				'<p><strong><em>' . __('The WordPress Admin Bar', 'djg-admin-bar-button') . '</em></strong></p>'.
-				'<ul>'.
-					'<li><strong>' . __('Slide Duration', 'djg-admin-bar-button') . '</strong>: ' . __('500 milliseconds (0.5 seconds)', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Slide Direction', 'djg-admin-bar-button') . '</strong>: ' . __('Right', 'djg-admin-bar-button') .'</li>'.
-					'<li><strong>' . __('Show Time', 'djg-admin-bar-button') . '</strong>: ' . __('5000 milliseconds (5 seconds)', 'djg-admin-bar-button') .'</li>'.
-				'</ul>'.
-				
-				'<h3>' . __('Can I prevent the Admin Bar Button and/or the Admin Bar being animated when it is shown or hidden?', 'djg-admin-bar-button') . '</h3>'.
-				'<p>'.
-					__('Yes, you simply have to set the ', 'djg-admin-bar-button').
-					'<strong>' . __('Slide Duration', 'djg-admin-bar-button') . '</strong>'.
-					__(' option to ', 'djg-admin-bar-button').
-					'<strong>' . __('0', 'djg-admin-bar-button') . '</strong>'.
-					__('. There is a separate option for both the ', 'djg-admin-bar-button').
-					'<strong>' . __('Admin Bar Button', 'djg-admin-bar-button') . '</strong>'.
-					__(' and the ', 'djg-admin-bar-button').
-					'<strong>' . __('WordPress Admin Bar', 'djg-admin-bar-button') . '</strong>'.
-					__(', so you can animate only one or the other if you so chose.', 'djg-admin-bar-button').
-				'</p>'.
-				
-				'<h3>' . __('Can I restore the default settings?', 'djg-admin-bar-button') . '</h3>'.
-				'<p>'.
-					__('Of course. Simply visit the ', 'djg-admin-bar-button').
-					'<strong>' . __('Settings', 'djg-admin-bar-button') . '</strong>'.
-					__(' page (', 'djg-admin-bar-button').
-					'<em>' . __('Settings &raquo; Admin Bar Button', 'djg-admin-bar-button') . '</em>'.
-					__('), scroll to the bottom and click Restore Defaults. ', 'djg-admin-bar-button').
-					__('You\'ll be asked to confirm that you wish to do this, and then all of the defaults will be restored.', 'djg-admin-bar-button').
-				'</p>'
-				
+			'callback'	=> array(&$this, 'do_help_faq')
 		));
 		
 		$this->screen->add_help_tab(array(
 			'id'		=> 'support',
 			'title'		=> __('Support'),
-			'content'	=>
-				'<p>'.
-					__('If you find a bug with this plugin please report it on the ', 'djg-admin-bar-button').
-					'<a href="http://wordpress.org/support/plugin/admin-bar-button" title="' . esc_attr__('Admin Bar Button &raquo; Support', 'djg-admin-bar-button') . '">' . __('plugin support page', 'djg-admin-bar-button') . '</a>.'. 
-				'</p>'.
-				'<p>'.
-					__('General comments, gripes and requests relating to this plugin are also welcome.', 'djg-admin-bar-button').
-				'</p>'
+			'callback'	=> array(&$this, 'do_help_support')
+		));
+		
+		$this->screen->add_help_tab(array(
+			'id'		=> 'donate',
+			'title'		=> __('Donate'),
+			'callback'	=> array(&$this, 'do_help_donate')
 		));
 		
 	}
@@ -593,6 +519,167 @@ var djg_admin_bar_button = false
 			)
 		);
 		
+	}
+	
+	/**
+	 * Output the help sidebar
+	 */
+	private function do_help_sidebar(){
+	
+		ob_start();
+?>
+			<p>
+				<strong><?php _e('For more information', 'djg-admin-bar-button'); ?>:</strong>
+			</p>
+			<p>
+				<a href="http://wordpress.org/plugins/admin-bar-button/" title="'<?php esc_attr_e('Admin Bar Button', 'djg-admin-bar-button'); ?>">
+					<?php _e('Visit the Plugin Page', 'djg-admin-bar-button'); ?>
+				</a>
+			</p>
+<?php
+		return ob_get_clean();
+	
+	}
+	
+	/**
+	 * Callback for outputting the 'Description' halp tab
+	 */
+	public function do_help_description(){
+?>
+		<p>
+			<?php _e('Thanks for installing Admin Bar Button, I hope that you like the plugin.', 'djg-admin-bar-button'); ?>
+		</p>
+		<p>
+			<?php _e('Admin Bar Button is a plugin that will create a simple button to replace the default WordPress admin bar on the front end. ', 'djg-admin-bar-button'); ?>
+			<?php _e('When using this plugin, the full height of the page is used by your site, which is particularly handy if you have fixed headers.', 'djg-admin-bar-button'); ?>
+		</p>
+		<p>
+			<?php _e('Please see the ', 'djg-admin-bar-button'); ?>
+			<a href="http://wordpress.org/plugins/admin-bar-button/screenshots/" title="<?php esc_attr_e('Admin Bar Button &raquo; Screenshots', 'djg-admin-bar-button'); ?>">
+				<?php _e('these screenshots', 'djg-admin-bar-button'); ?>
+			</a>
+			<?php _e('to see how the Admin Bar Button looks.', 'djg-admin-bar-button'); ?>
+		</p>
+<?php
+	}
+	
+	/**
+	 * Callback for outputting the 'FAQ' halp tab
+	 */
+	public function do_help_faq(){
+?>
+		<h3>
+			<?php _e('What do all of the options mean?', 'djg-admin-bar-button'); ?>
+		</h3>
+		<p><strong><em>
+			<?php _e('The Admin Bar Button, added by this plugin', 'djg-admin-bar-button'); ?>
+		</em></strong></p>
+		<ul>
+			<li><strong><?php _e('Button Text', 'djg-admin-bar-button'); ?></strong>: <?php _e('The text to display in the Admin Bar Button. You can set this to anything you want, the button will resize appropriately.', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Text Direction', 'djg-admin-bar-button'); ?></strong>: <?php _e('The direction of the Admin Bar Button text. Default is left-to-right, but you can use right-to-left if appropriate for you language.', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Position on the Screen', 'djg-admin-bar-button'); ?></strong>: <?php _e('Where on the screen to position the Admin Bar Button. You can place the button in any of the four corners. If you choose \'Bottom left\' or \'Bottom right\' then the WordPress Admin Bar will also be shown on the bottom of the screen.', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Button Activated On', 'djg-admin-bar-button'); ?></strong>: <?php _e('The actions that will activate the Admin Bar. Currently you can choose between when the user clicks the button, when they hover over it, or both.', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Slide Duration', 'djg-admin-bar-button'); ?></strong>: <?php _e('The time (in milliseconds) that it takes for the Admin Bar Button to slide off of the screen (and back on to it when the WordPress Admin Bar is hidden again). Any positive value is acceptable, and setting it to \'0\' will disable the animation.', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Slide Direction', 'djg-admin-bar-button'); ?></strong>: <?php _e('The direction from which the Admin Bar Button will slide off of the screen (and back on to it when the WordPress Admin Bar is hidden again). This option is irrelevant and so ignored if \'Slide Duration\' is set to \'0\'.', 'djg-admin-bar-button'); ?></li>
+		</ul>                                                            
+		<p><strong><em>
+			<?php _e('The WordPress Admin Bar', 'djg-admin-bar-button'); ?>
+		</em></strong></p>
+		<ul>
+			<li><strong><?php _e('Slide Duration', 'djg-admin-bar-button'); ?></strong>: <?php _e('The time (in milliseconds) that it takes for the WordPress Admin Bar to slide on to the screen (and back off of it when the Admin Bar Button is shown again). Any positive value is acceptable, and setting it to \'0\' will disable the animation.', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Slide Direction', 'djg-admin-bar-button'); ?></strong>: <?php _e('The direction from which the WordPress Admin Bar will slide on to the screen (and back off of it when the Admin Bar Button is shown again). This option is irrelevant and so ignored if \'Slide Duration\' is set to \'0\'.', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Show Time', 'djg-admin-bar-button'); ?></strong>: <?php _e('The time (in milliseconds) that the Admin Bar will be visible for, when shown. The minimum time is 2000 (2 seconds), and setting this option to less than that will result in the default being used.', 'djg-admin-bar-button'); ?></li>
+		</ul>                                                       
+		
+		<h3>
+			<?php _e('What are the option defaults?', 'djg-admin-bar-button'); ?>
+		</h3>
+		<p><strong><em>
+			<?php _e('The Admin Bar Button, added by this plugin', 'djg-admin-bar-button'); ?>
+		</em></strong></p>
+		<ul>
+			<li><strong><?php _e('Button Text', 'djg-admin-bar-button'); ?></strong>: <?php _e('Admin bar', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Text Direction', 'djg-admin-bar-button'); ?></strong>: <?php _e('Left to right', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Position on the Screen', 'djg-admin-bar-button'); ?></strong>: <?php _e('Top left', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Button Activated On', 'djg-admin-bar-button'); ?></strong>: <?php _e('Hover and click', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Slide Duration', 'djg-admin-bar-button'); ?></strong>: <?php _e('500 milliseconds (0.5 seconds)', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Slide Direction', 'djg-admin-bar-button'); ?></strong>: <?php _e('Left', 'djg-admin-bar-button'); ?></li>
+		</ul>                                                                
+		<p><strong><em>
+			<?php _e('The WordPress Admin Bar', 'djg-admin-bar-button'); ?>
+		</em></strong></p>
+		<ul>
+			<li><strong><?php _e('Slide Duration', 'djg-admin-bar-button'); ?></strong>: <?php _e('500 milliseconds (0.5 seconds)', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Slide Direction', 'djg-admin-bar-button'); ?></strong>: <?php _e('Right', 'djg-admin-bar-button'); ?></li>
+			<li><strong><?php _e('Show Time', 'djg-admin-bar-button'); ?></strong>: <?php _e('5000 milliseconds (5 seconds)', 'djg-admin-bar-button'); ?></li>
+		</ul>                                                       
+		
+		<h3>
+			<?php _e('Can I prevent the Admin Bar Button and/or the Admin Bar being animated when it is shown or hidden?', 'djg-admin-bar-button'); ?>
+		</h3>
+		<p>
+			<?php _e('Yes, you simply have to set the', 'djg-admin-bar-button'); ?>
+			<strong><?php _e('Slide Duration', 'djg-admin-bar-button'); ?></strong>
+			<?php _e('option to', 'djg-admin-bar-button'); ?>
+			<strong><?php _e('0', 'djg-admin-bar-button'); ?></strong>.
+			<?php _e('There is a separate option for both the ', 'djg-admin-bar-button'); ?>
+			<strong><?php _e('Admin Bar Button', 'djg-admin-bar-button'); ?></strong>
+			<?php _e('and the', 'djg-admin-bar-button'); ?>
+			<strong><?php _e('WordPress Admin Bar', 'djg-admin-bar-button'); ?></strong>,
+			<?php _e('so you can animate only one or the other if you so choose.', 'djg-admin-bar-button'); ?>
+		</p>
+		
+		<h3>
+			<?php _e('Can I restore the default settings?', 'djg-admin-bar-button'); ?>
+		</h3>
+		<p>
+			<?php _e('Of course. Simply visit the', 'djg-admin-bar-button'); ?>
+			<strong><?php _e('Settings', 'djg-admin-bar-button'); ?></strong>
+			<?php _e('page', 'djg-admin-bar-button'); ?>
+			(<em><?php _e('Settings &raquo; Admin Bar Button', 'djg-admin-bar-button'); ?></em>),
+			<?php _e('scroll to the bottom and click Restore Defaults.', 'djg-admin-bar-button'); ?>
+			<?php _e('You\'ll be asked to confirm that you wish to do this, and then all of the defaults will be restored.', 'djg-admin-bar-button'); ?>
+		</p>
+<?php
+	}
+	
+	/**
+	 * Callback for outputting the 'Support' halp tab
+	 */
+	public function do_help_support(){
+?>
+		<p>
+			<?php _e('If you find a bug with this plugin please report it on the ', 'djg-admin-bar-button'); ?>
+			<a href="http://wordpress.org/support/plugin/admin-bar-button" title="<?php esc_attr_e('Admin Bar Button &raquo; Support', 'djg-admin-bar-button'); ?>">
+				<?php _e('plugin support page', 'djg-admin-bar-button'); ?>
+			</a>
+			<?php _e('and I\'ll do my best to fix the problem quickly for you.', 'djg-admin-bar-button'); ?>
+		</p>
+		<p>
+			<?php _e('General comments, gripes and requests relating to this plugin are also welcome.', 'djg-admin-bar-button'); ?>
+		</p>
+<?php
+	}
+	
+	/**
+	 * Callback for outputting the 'Donate' halp tab
+	 */
+	public function do_help_donate(){
+?>
+		<p>
+			<?php _e('This plugin is free to use and you may distribute it as you please', 'djg-admin-bar-button'); ?>
+		</p>
+		<p>
+			<?php _e('I love coding and have made this plugin because it was something I felt was useful, and hopefully you will to. ', 'djg-admin-bar-button'); ?>
+			<?php _e('There is absolutely no obligation for you to do so, but if you like my work I\'d be very grateful for any donations that you wish to make. ', 'djg-admin-bar-button'); ?>
+		</p>
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="3DPCXL86N299A">
+			<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+		</form>
+<?php
 	}
 	
 	/**
