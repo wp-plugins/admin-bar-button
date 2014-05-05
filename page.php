@@ -165,7 +165,7 @@ var djg_admin_bar_button = false
 	 */
 	public function on_admin_init(){
 	
-		add_action('load-'.$this->page_hook, array(&$this, 'on_admin_load'));							// Set information that can only be gathered once the page has loaded
+		add_action('load-'.$this->page_hook, array(&$this, 'on_admin_load'));	// Set information that can only be gathered once the page has loaded
 		
 		register_setting(
 			'admin_bar_button_group',			// Group name
@@ -352,9 +352,14 @@ var djg_admin_bar_button = false
 	public function on_admin_print_styles(){
 ?>
 <style>
-.tip{
+.tips{
+	display: inline-block;
 	font-style:	italic;
 	margin-left: 10px;
+	vertical-align: middle;
+}
+.tip{
+	display: block;
 }
 </style>
 <?php
@@ -713,9 +718,11 @@ var djg_admin_bar_button = false
 	private function do_option_text($id, $args = array()){
 	
 		$defaults = array(
-			'name'		=> '',
-			'value'		=> false,
-			'class'		=> ''
+			'name'			=> '',
+			'value'			=> false,
+			'class'			=> '',
+			'description'	=> false,
+			'tips'			=> false
 		);
 		$args = wp_parse_args($args, $defaults);
 		extract($args, EXTR_OVERWRITE);
@@ -730,7 +737,7 @@ var djg_admin_bar_button = false
 			$value	/** %4$s - The value of the option */
 		);
 		
-		$this->do_tip($tip);
+		$this->do_tips($tips);
 		$this->do_description($description);
 		
 	}
@@ -750,7 +757,7 @@ var djg_admin_bar_button = false
 			'class'			=> '',
 			'optgroup'		=> 'Select an option',
 			'description'	=> false,
-			'tip'			=> false
+			'tips'			=> false
 		);
 		$args = wp_parse_args($args, $defaults);
 		extract($args, EXTR_OVERWRITE);
@@ -793,7 +800,7 @@ var djg_admin_bar_button = false
 			
 		endif;
 		
-		$this->do_tip($tip);
+		$this->do_tips($tips);
 		$this->do_description($description);
 		
 	}
@@ -802,21 +809,33 @@ var djg_admin_bar_button = false
 	 * Output a tip next do an option
 	 *
 	 * @since 2.2
-	 * @param required mixed $tip	The tip to output
+	 * @param required array $tips	The tips to output (must be an array of arrays)
 	 */
-	private function do_tip($tip){
+	private function do_tips($tips){
 	
-		if(is_array($tip)) :
-			printf(
-				"\n\t".'<span class="tip"><strong>%1$s:</strong> %2$s</span>'."\n",
-				$tip[0],	/** %1$s - The tip prefix */
-				$tip[1]		/** %2$s - The tip to display */
-			);
-		elseif(is_string($tip)) :
-			printf(
-				"\n\t".'<span class="tip">%1$s</span>'."\n",
-				$tip	/** %1$s - The tip to display */
-			);
+		if(!empty($tips)) :
+		
+			echo '<span class="tips">';
+			
+			foreach($tips as $tip) :
+		
+				if(is_array($tip)) :
+					printf(
+						"\n\t".'<span class="tip"><strong>%1$s:</strong> %2$s</span>'."\n",
+						$tip[0],	/** %1$s - The tip prefix */
+						$tip[1]		/** %2$s - The tip to display */
+					);
+				elseif(is_string($tip)) :
+					printf(
+						"\n\t".'<span class="tip">%1$s</span>'."\n",
+						$tip	/** %1$s - The tip to display */
+					);
+				endif;
+				
+			endforeach;
+			
+			echo '</span>';
+			
 		endif;
 		
 	}
@@ -954,9 +973,11 @@ var djg_admin_bar_button = false
 				'options'		=> $options,
 				'selected'		=> $selected,
 				'description'	=> __('The side of the screen from which the Admin Bar Button will exit (and enter).', 'djg-admin-bar-button'),
-				'tip'			=> array(
-					__('Tip', 'djg-admin-bar-button'),
-					__('Ignored if Admin Bar Button Slide Duration is \'0\'', 'djg-admin-bar-button')
+				'tips'			=> array(
+					array(
+						__('Tip', 'djg-admin-bar-button'),
+						__('Ignored if Admin Bar Button Slide Duration is \'0\'', 'djg-admin-bar-button')
+					)
 				)
 			)
 		);
@@ -999,9 +1020,11 @@ var djg_admin_bar_button = false
 				'options'		=> $options,
 				'selected'		=> $selected,
 				'description'	=> __('The side of the screen from which the Admin Bar will enter (and exit).', 'djg-admin-bar-button'),
-				'tip'			=> array(
-					__('Tip', 'djg-admin-bar-button'),
-					__('Ignored if Admin Bar Slide Duration is \'0\'', 'djg-admin-bar-button')
+				'tips'			=> array(
+					array(
+						__('Tip', 'djg-admin-bar-button'),
+						__('Ignored if Admin Bar Slide Duration is \'0\'', 'djg-admin-bar-button')
+					)
 				)
 			)
 		);
