@@ -110,7 +110,7 @@ $(function(){
 				left:				left,
 				right:				right,
 				top:				top,
-				Zindex:				'100000'
+				zIndex:				'100000'
 			});
 			
 			/** Format the Admin Bar Button text */

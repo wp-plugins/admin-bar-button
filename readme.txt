@@ -3,8 +3,8 @@ Contributors: duck__boy
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DPCXL86N299A
 Tags: admin bar, admin, bar, jquery ui, jquery, ui, widget factory, widget, factory, plugin, button, toggle, duck__boy
 Requires at least: 3.8
-Tested up to: 3.9
-Stable tag: 2.2
+Tested up to: 3.9.1
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,9 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 3. The plugin settings page.
 
 == Changelog ==
+
+= 2.2.1 =
+* Fix a z-index issue that was causing the Admin Bar Button to be hidden behind fixed headers
 
 = 2.2 =
 * New option to choose the action upon which Admin Bar Button shows the WordPress Admin Bar; click and hover, click, or hover.
