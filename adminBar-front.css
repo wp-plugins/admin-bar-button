@@ -1,7 +1,7 @@
 /**
  * @package:		WordPress
  * @subpackage:		Admin Bar Button Plugin
- * @description:	CSS for the 'adminBar' jQuery widget
+ * @description:	CSS for the 'adminBar' jQuery widget on the front end
  */
 
 .djg-admin-bar-button{
@@ -37,4 +37,9 @@
 .djg-admin-bar-button span.ab-icon-position-bottom-right:before{
 	content: 		"\f340";
 	padding-left: 	20px;
+}
+
+#wpadminbar #wp-admin-bar-hide .ab-icon:before{
+    content:	"\f158";
+    top:		3px;
 }

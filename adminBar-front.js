@@ -12,14 +12,18 @@ $(function(){
 	
 		options : {
 		
-			text:				'Admin bar',	// The text to display in the button
-			text_direction:		'ltr',			// The direction of the text
-			button_position:	'top-left',		// Where to place the button
-			button_direction:	'left',			// The direction that the Admin Bar Button sldes on/off the screen
-			button_duration:	500,			// The length of time to take to show/hide the Admin Bar Button
-			bar_direction:		'right',		// The direction that the WordPress admin bar sldes on/off the screen
-			bar_duration:		500,			// The length of time to take to show/hide the Admin Bar
-			show_time:			5000			// The length of time to show the Admin Bar for
+			text:					'Admin bar',	// The text to display in the button
+			text_direction:			'ltr',			// The direction of the text
+			button_position:		'top-left',		// Where to place the button
+			button_animate:			'yes',			// Whether or not to animate the show/hide of the Admin Bar Button
+			button_direction:		'left',			// The direction that the Admin Bar Button sldes on/off the screen
+			button_duration:		500,			// The length of time to take to show/hide the Admin Bar Button
+			bar_animate:			'yes',			// Whether or not to animate the show/hide of the WordPress Admin Bar
+			bar_direction:			'right',		// The direction that the WordPress Admin Bar sldes on/off the screen
+			bar_duration:			500,			// The length of time to take to show/hide the WordPress Admin Bar
+			bar_shown_behaviour:	'go',			// Whether the WordPress Admin Bar should 'stay' or 'go' once it has been shown
+			show_time:				5000,			// The length of time to show the WordPress Admin Bar for
+			show_hide_button:		true			// Whether or not to show the 'hide' button on the WordPress Admin Bar
 			
         }, // options
 	
@@ -27,13 +31,17 @@ $(function(){
 		 * Constructor
 		 */
 		_create : function(){
-		
+		console.log(this.options);
 			/** Ensure that this is a valid '#wpadminbar' element */
 			this._validate_element();
 			if(!this.valid){
 				return false;
 			}
 			
+			/** Check to see if the show/hide of the Admin Bar Button and the WordPress Admin Bar should be animated */
+			this._check_animate_options();
+			
+			/** Set that the WordPress Admin Bar can be shown */
 			this._can_show(true);
 			
 			/** Initialise the layout of the widget */
@@ -54,6 +62,17 @@ $(function(){
 		}, // _validate_element
 		
 		/**
+		 * Check to see if the show/hide of the Admin Bar Button and the WordPress Admin Bar should be animated
+		 * Set the associated duration option to '0' if the animation is not required
+		 */
+		_check_animate_options : function(){
+		
+			if(this.options.button_animate === 'no') this.options.button_duration = 0;
+			if(this.options.bar_animate === 'no') this.options.bar_duration = 0;
+			
+		}, // _check_animate_options
+		
+		/**
 		 * Create the layout of the widget
 		 */
 		_create_layout : function(){
@@ -68,6 +87,9 @@ $(function(){
 			if(this.options.button_position.indexOf('right') > -1) this.button.append(this.button_icon);
 			this.button.append(this.button_text);
 			if(this.options.button_position.indexOf('left') > -1) this.button.append(this.button_icon);
+			
+			/** Grab the 'Hide admin bar' object */
+			this.buttonHide = $('#wpadminbar #wp-admin-bar-hide a');
 			
             /** Format the 'Show admin bar' button */
             this._format_button();
@@ -138,12 +160,12 @@ $(function(){
 			if(t.options.button_activate === 'both' || t.options.button_activate === 'hover'){
 			
 				/** Capture when the mouse is hovered over the  Admin Bar Button */
-				t.button.on('mouseenter', function(e){
+				t.button.on('mouseenter', function(){
 					t._start_show_admin_bar_timeout();	// Restart the timout
 				});
 				
 				/** Capture when the mouse leaves the  Admin Bar Button */
-				t.button.on('mouseleave', function(e){
+				t.button.on('mouseleave', function(){
 					t._clear_show_admin_bar_timeout();	// Clear the existing timeout
 				});
 				
@@ -153,20 +175,37 @@ $(function(){
 			if(t.options.button_activate === 'both' || t.options.button_activate === 'click'){
 			
 				/** Capture when the  Admin Bar Button is clicked */
-				t.button.on('click', function(e){
+				t.button.on('click', function(){
 					t._manage_show_admin_bar();	// Show the Admin Bar
 				});
 				
 			}
 			
-			/** Capture when the mouse is hovered over the WordPress admin bar */
-			t.element.on('mouseenter', function(e){
-				t._clear_hide_admin_bar_timeout();	// Clear the existing timeout
-			});
+			/** Add the Admin Bar hide timeout events */
+			if(t.options.bar_shown_behaviour !== 'stay'){
+				
+				/** Capture when the mouse is hovered over the WordPress admin bar */
+				t.element.on('mouseenter', function(){
+					t._clear_hide_admin_bar_timeout();	// Clear the existing timeout
+				});
+				
+				/** Capture when the mouse leaves the WordPress admin bar */
+				t.element.on('mouseleave', function(){
+					t._start_hide_admin_bar_timeout();	// Restart the timout
+				});
+				
+			}
 			
-			/** Capture when the mouse leaves the WordPress admin bar */
-			t.element.on('mouseleave', function(e){
-				t._start_hide_admin_bar_timeout();	// Restart the timout
+			/** Add the Hide Admin Bar Button 'click' event */
+			t.buttonHide.on('click', function(e){
+			
+				e.preventDefault();		// Prevent the default click action occuring to the link
+				t._hide_admin_bar();	// Hide the WordPress admin bar and shwo the Admin Bar Button
+				
+				if(t.options.bar_shown_behaviour !== 'stay'){
+					t._clear_hide_admin_bar_timeout();	// Clear the existing timeout
+				}
+				
 			});
 			
 		}, // _create_events
@@ -188,7 +227,7 @@ $(function(){
 		}, // _can_show
 		
 		/**
-		 * Setup a timeout to show the WordPress admin bar (if the mouse does not move away for 0.5 seconds)
+		 * Setup a timeout to show the Admin Bar
 		 */
 		_start_show_admin_bar_timeout : function(){
 		
@@ -222,7 +261,6 @@ $(function(){
 			var t = this;	// This object
 			
 			this.timer = setTimeout(function(){
-				
 				t._hide_admin_bar();				// Hide the WordPress admin bar and shwo the Admin Bar Button
 				t._clear_hide_admin_bar_timeout();	// Clear the existing timeout
 				
@@ -245,8 +283,12 @@ $(function(){
 		_manage_show_admin_bar : function(){
 		
 			this._show_admin_bar();					// Show the WordPress admin bar and hide the Admin Bar Button
-			this._start_hide_admin_bar_timeout();	// Start a new timeout (to hide the Admin Bar if it's not hovered on)
-			this._clear_show_admin_bar_timeout();	// Clear the timeout for showing the Admin Bar
+			
+			/** Only include the Admin Bar hide timeouts if the bar is set to auto-hide */
+			if(this.options.bar_shown_behaviour !== 'stay'){
+				this._start_hide_admin_bar_timeout();	// Start a new timeout (to hide the Admin Bar if it's not hovered on)
+				this._clear_show_admin_bar_timeout();	// Clear the timeout for showing the Admin Bar
+			}
 			
 		}, // _showing_admin_bar
 		
@@ -322,17 +364,7 @@ $(document).ready(function(){
 		if(djg_admin_bar_button.button_position === 'left') djg_admin_bar_button.button_position = 'top-left';
 		if(djg_admin_bar_button.button_position === 'right') djg_admin_bar_button.button_position = 'top-right';
 		
-		$('#wpadminbar').adminBar({
-			text:               djg_admin_bar_button.text,
-			text_direction:     djg_admin_bar_button.text_direction,
-			button_position:    djg_admin_bar_button.button_position,
-			button_direction:   djg_admin_bar_button.button_direction,
-			button_duration:    djg_admin_bar_button.button_duration,
-			button_activate:    djg_admin_bar_button.button_activate,
-			bar_direction:      djg_admin_bar_button.bar_direction,
-			bar_duration:       djg_admin_bar_button.bar_duration,
-			show_time:          djg_admin_bar_button.show_time
-		});
+		$('#wpadminbar').adminBar(djg_admin_bar_button);
 		
 	}
 });
