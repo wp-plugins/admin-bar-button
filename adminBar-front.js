@@ -31,7 +31,7 @@ $(function(){
 		 * Constructor
 		 */
 		_create : function(){
-		console.log(this.options);
+		
 			/** Ensure that this is a valid '#wpadminbar' element */
 			this._validate_element();
 			if(!this.valid){

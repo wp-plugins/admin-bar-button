@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin bar, admin, bar, jquery ui, jquery, ui, widget factory, widget, factory, plugin, button, toggle, duck__boy
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 3.0
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,9 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 4. The 'WordPress Admin Bar' options of the plugin settings page.
 
 == Changelog ==
+
+= 3.0.1 =
+* Bug fixes.
 
 = 3.0 =
 * New 'Hide' button to the Admin Bar.
