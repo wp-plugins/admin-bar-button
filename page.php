@@ -95,25 +95,46 @@ class ABB_Page{
 	 */
 	public function after_setup_theme(){
 	
-		/** Set the CSS to remove the space typically alocated to the admin bar */
+		/** Set the CSS to remove the space typically alocated to the WordPress Admin Bar */
 		add_theme_support('admin-bar', array('callback' => array(&$this, 'on_admin_bar')));
 		
 	}
 	
 	/**
-	 * Set the CSS to remove the space typically alocated to the admin bar
+	 * Set the CSS to remove the space typically reserved for the WordPress Admin Bar
 	 */
 	public function on_admin_bar(){
+		
+		$reserve_space = $this->get_value('bar_reserve_space');
+
 ?>
-<style>
-body{
-	margin-top: 0;
+<style media="print" type="text/css">
+#wpadminbar { display:none; }
+</style>
+<?php		
+		if((bool)$reserve_space) :
+?>		
+<style media="screen" type="text/css">
+html { margin-top: 32px !important; }
+* html body { margin-top: 32px !important; }
+@media screen and ( max-width: 782px ) {
+	html { margin-top: 46px !important; }
+	* html body { margin-top: 46px !important; }
 }
-#wpadminbar{
-	display: none;
-}
+#wpadminbar{ display: none; }
 </style>
 <?php
+		else :
+?>
+<style>
+.admin-bar.masthead-fixed .site-header {
+    top: 0;
+}
+#wpadminbar{ display: none; }
+</style>
+<?php
+		endif;
+		
 	}
 	
 	/**
@@ -144,6 +165,7 @@ var djg_admin_bar_button = {
 	button_direction:		'<?php echo $this->get_value('button_direction'); ?>',
 	button_duration:		<?php echo $this->get_value('button_duration'); ?>,
 	button_activate:		'<?php echo $this->get_value('button_activate'); ?>',
+	bar_reserve_space:		<?php echo $this->get_value('bar_reserve_space'); ?>,
 	bar_animate:			'<?php echo $this->get_value('bar_animate'); ?>',
 	bar_direction:			'<?php echo $this->get_value('bar_direction'); ?>',
 	bar_duration:			<?php echo $this->get_value('bar_duration'); ?>,
@@ -194,9 +216,9 @@ var djg_admin_bar_button = false
 	
 		$this->page_hook = add_options_page(
 			__('Admin Bar Button Settings', $this->plugin_text_domain),	// Page title
-			__('Admin Bar Button', $this->plugin_text_domain),				// Menu title
+			__('Admin Bar Button', $this->plugin_text_domain),			// Menu title
 			'manage_options',											// Required capability
-			$this->plugin_slug,										// Page slug
+			$this->plugin_slug,											// Page slug
 			array(&$this, 'on_show_page')								// Rendering callback
 		);
 		
@@ -228,12 +250,12 @@ var djg_admin_bar_button = false
         );
 		
 		add_settings_field(
-            'text',										// ID
+            'text',											// ID
             __('Button Text', $this->plugin_text_domain),	// Title
-            array($this, '_option_button_text'),		// Callback
-            'djg_admin_bar_button',						// Page
-            'abb_button_section',						// Section
-			array(										// Args
+            array($this, '_option_button_text'),			// Callback
+            'djg_admin_bar_button',							// Page
+            'abb_button_section',							// Section
+			array(											// Args
 				'label_for' => 'text'
 			) 
         );
@@ -310,19 +332,30 @@ var djg_admin_bar_button = false
 		-----------------------------------------------*/
 		
 		add_settings_section(
-            'abb_bar_section',											// ID
+            'abb_bar_section',												// ID
             __('WordPress Admin Bar Settings', $this->plugin_text_domain),	// Title
-            false,														// Callback
-            'djg_admin_bar_button'										// Page
+            false,															// Callback
+            'djg_admin_bar_button'											// Page
         );
 		
 		add_settings_field(
-            'bar_animate',							// ID
+            'bar_reserve_space',							// ID
+            __('Reserve Space', $this->plugin_text_domain),	// Title
+            array($this, '_option_bar_reserve_space'),		// Callback
+            'djg_admin_bar_button',							// Page
+            'abb_bar_section',								// Section
+			array(											// Args
+				'label_for' => 'bar_reserve_space'
+			) 
+        );
+		
+		add_settings_field(
+            'bar_animate',								// ID
             __('Animate', $this->plugin_text_domain),	// Title
-            array($this, '_option_bar_animate'),	// Callback
-            'djg_admin_bar_button',					// Page
-            'abb_bar_section',						// Section
-			array(									// Args
+            array($this, '_option_bar_animate'),		// Callback
+            'djg_admin_bar_button',						// Page
+            'abb_bar_section',							// Section
+			array(										// Args
 				'label_for' => 'bar_animate'
 			) 
         );
@@ -530,6 +563,11 @@ var djg_admin_bar_button = false
             $new_input['button_direction'] = (array_key_exists($input['button_direction'], $this->select_options['button_direction'])) ? $input['button_direction'] : $this->defaults['button_direction'];
 		endif;
 		
+		/** Show reserve space */
+		if(isset($input['bar_reserve_space'])) :
+			$new_input['bar_reserve_space'] = (isset($input['bar_reserve_space'])) ? intval($input['bar_reserve_space']) : intval($this->defaults['bar_reserve_space']);
+		endif;
+		
 		/** Bar animate */
 		if(isset($input['bar_animate'])) :
             $new_input['bar_animate'] = (array_key_exists($input['bar_animate'], $this->select_options['bar_animate'])) ? $input['bar_animate'] : $this->defaults['bar_animate'];
@@ -588,6 +626,7 @@ var djg_admin_bar_button = false
 			'button_animate'		=> 'yes',
 			'button_duration'		=> 500,
 			'button_direction'		=> 'left',
+			'bar_reserve_space'		=> 0,
 			'bar_animate'			=> 'yes',
 			'bar_duration'			=> 500,
 			'bar_direction'			=> 'right',
@@ -715,6 +754,7 @@ var djg_admin_bar_button = false
 			<?php _e('The WordPress Admin Bar', $this->plugin_text_domain); ?>
 		</em></strong></p>
 		<ul>
+			<li><strong><?php _e('Reserve Space', $this->plugin_text_domain); ?></strong>: <?php _e('Whether or not reserve space at the top of the page for the WordPress Admin Bar.', $this->plugin_text_domain); ?></li>
 			<li><strong><?php _e('Animate', $this->plugin_text_domain); ?></strong>: <?php _e('Whether or not to animate the show/hide of the WordPress Admin Bar.', $this->plugin_text_domain); ?></li>
 			<li><strong><?php _e('Slide Duration', $this->plugin_text_domain); ?></strong>: <?php _e('The time (in milliseconds) that it takes for the WordPress Admin Bar to slide on to the screen (and back off of it when the Admin Bar Button is shown again).  Any positive value is acceptable, and setting it to \'0\' will disable the animation.', $this->plugin_text_domain); ?></li>
 			<li><strong><?php _e('Slide Direction', $this->plugin_text_domain); ?></strong>: <?php _e('The direction from which the WordPress Admin Bar will slide on to the screen (and back off of it when the Admin Bar Button is shown again).  This option is irrelevant and so ignored if either \'Animate\' is set to \'No\' or \'Slide Duration\' is set to \'0\'.', $this->plugin_text_domain); ?></li>
@@ -734,7 +774,7 @@ var djg_admin_bar_button = false
 			<li><strong><?php _e('Text Direction', $this->plugin_text_domain); ?></strong>: <?php _e('Left to right', $this->plugin_text_domain); ?></li>
 			<li><strong><?php _e('Position on the Screen', $this->plugin_text_domain); ?></strong>: <?php _e('Top left', $this->plugin_text_domain); ?></li>
 			<li><strong><?php _e('Button Activated On', $this->plugin_text_domain); ?></strong>: <?php _e('Hover and click', $this->plugin_text_domain); ?></li>
-			<li><strong><?php _e('Animate the hide/show of the Admin Bar Button', $this->plugin_text_domain); ?></strong>: <?php _e('Yes', $this->plugin_text_domain); ?></li>
+			<li><strong><?php _e('Animate', $this->plugin_text_domain); ?></strong>: <?php _e('Yes', $this->plugin_text_domain); ?></li>
 			<li><strong><?php _e('Slide Duration', $this->plugin_text_domain); ?></strong>: <?php _e('500 milliseconds (0.5 seconds)', $this->plugin_text_domain); ?></li>
 			<li><strong><?php _e('Slide Direction', $this->plugin_text_domain); ?></strong>: <?php _e('Left', $this->plugin_text_domain); ?></li>
 		</ul>                                                                
@@ -742,7 +782,8 @@ var djg_admin_bar_button = false
 			<?php _e('The WordPress Admin Bar', $this->plugin_text_domain); ?>
 		</em></strong></p>
 		<ul>
-			<li><strong><?php _e('Animate the hide/show of the WordPress Admin Bar', $this->plugin_text_domain); ?></strong>: <?php _e('Yes', $this->plugin_text_domain); ?></li>
+			<li><strong><?php _e('Reserve Space', $this->plugin_text_domain); ?></strong>: <?php _e('No', $this->plugin_text_domain); ?></li>
+			<li><strong><?php _e('Animate', $this->plugin_text_domain); ?></strong>: <?php _e('Yes', $this->plugin_text_domain); ?></li>
 			<li><strong><?php _e('Slide Duration', $this->plugin_text_domain); ?></strong>: <?php _e('500 milliseconds (0.5 seconds)', $this->plugin_text_domain); ?></li>
 			<li><strong><?php _e('Slide Direction', $this->plugin_text_domain); ?></strong>: <?php _e('Right', $this->plugin_text_domain); ?></li>
 			<li><strong><?php _e('Admin Bar Behaviour', $this->plugin_text_domain); ?></strong>: <?php _e('Hide after a defined time', $this->plugin_text_domain); ?></li>
@@ -800,7 +841,7 @@ var djg_admin_bar_button = false
 			<?php _e('and I\'ll do my best to fix the problem quickly for you.', $this->plugin_text_domain); ?>
 		</p>
 		<p>
-			<?php _e('General comments, gripes and requests relating to this plugin are also welcome.', $this->plugin_text_domain); ?>
+			<?php _e('General comments, gripes and requests relating to this plugin are also welcome, especially if you are using a theme with which this plugin does not function correctly.', $this->plugin_text_domain); ?>
 		</p>
 <?php
 	}
@@ -1256,6 +1297,32 @@ var djg_admin_bar_button = false
 	}
 	
 	/**
+	 * Callback for outputting the 'bar_reserve_space' option
+	 */
+	public function _option_bar_reserve_space(){
+	
+		$value = $this->get_value('bar_reserve_space');	// Get the value currently saved for this option
+		$checked = ($value) ? true : false;
+		
+		$this->do_option(
+			'checkbox',			// Option type
+			'bar_reserve_space',		// ID
+			array(				// Args
+				'name'			=> 'admin_bar_button[bar_reserve_space]',
+				'checked'		=> $checked,
+				'description'	=> __('Whether or not to reserve space for the WordPress Admin Bar.', $this->plugin_text_domain),
+				'tips'			=> array(
+					array(
+						__('Tip', $this->plugin_text_domain),
+						__('The default WordPress Admin Bar does this, but for most sites it\'s unnecessary.', $this->plugin_text_domain)
+					)
+				)
+			)
+		);
+		
+	}
+	
+	/**
 	 * Callback for outputting the 'bar_animate' option
 	 */
 	public function _option_bar_animate(){
@@ -1338,7 +1405,7 @@ var djg_admin_bar_button = false
 				'name'			=> 'admin_bar_button[bar_shown_behaviour]',
 				'options'		=> $options,
 				'selected'		=> $selected,
-				'description'	=> __('Once the Admin Bar is shown, what should happen to it?.', $this->plugin_text_domain)
+				'description'	=> __('Once the Admin Bar is shown, what should happen to it?', $this->plugin_text_domain)
 			)
 		);
 		
@@ -1385,7 +1452,7 @@ var djg_admin_bar_button = false
 				'tips'			=> array(
 					array(
 						__('Tip', $this->plugin_text_domain),
-						__('Recommended if you set <b>Admin Bar Behaviour</b> to \'Always remain open\'', $this->plugin_text_domain)
+						__('Recommended if you set <b>Admin Bar Behaviour</b> to \'Always remain open\'.', $this->plugin_text_domain)
 					)
 				)
 			)

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin bar, admin, bar, jquery ui, jquery, ui, widget factory, widget, factory, plugin, button, toggle, duck__boy
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 3.0.1
+Stable tag: 3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,6 +18,9 @@ Please see the [Screenshots tab](http://wordpress.org/plugins/admin-bar-button/s
 
 After activating the plugin, if you wish you can change how the Admin Bar Button looks and works by visiting the **Settings** page (*Settings &raquo; Admin Bar Button*).
 However, **no user interaction is required** by the plugin; if you wish, you can simply install and activate Admin Bar Button and it'll work right away.
+
+This plugin has been tested with the built in **Twenty Fourteen**, **Twenty Thirteen** and **Twenty Twelve** themes.
+Should you find a theme with which it does not work, please open a new topic on the [Support tab](https://wordpress.org/support/plugin/admin-bar-button "Admin Bar Button &raquo; Support").
 
 == Installation ==
 
@@ -53,6 +56,7 @@ To do this, simply visit the **Settings** page (*Settings &raquo; Admin Bar Butt
 
 ***The WordPress Admin Bar***
 
+* **Reserve Space:**		>  Whether or not reserve space at the top of the page for the WordPress Admin Bar.
 * **Animate:**			>  Whether or not to animate the show/hide of the WordPress Admin Bar.
 * **Slide Duration:**		>  The time (in milliseconds) that it takes for the WordPress Admin Bar to slide on to the screen (and back off of it when the Admin Bar Button is shown again).  Any positive value is acceptable, and setting it to '0' will disable the animation.
 * **Slide Direction:**		>  The direction from which the WordPress Admin Bar will slide on to the screen (and back off of it when the Admin Bar Button is shown again).  This option is irrelevant and so ignored if either 'Animate' is set to 'No' or 'Slide Duration' is set to '0'.
@@ -65,18 +69,23 @@ To do this, simply visit the **Settings** page (*Settings &raquo; Admin Bar Butt
 
 ***The Admin Bar Button, added by this plugin***
 
-* **Button Text**		> Admin bar
-* **Text Direction**		> Left to right
-* **Position on the Screen**	> Top left
-* **Button Activated On**	> Hover and click
-* **Slide Duration**		> 500 milliseconds (0.5 seconds)
-* **Slide Direction**		> Left
+* **Button Text**		>  Admin bar
+* **Text Direction**		>  Left to right
+* **Position on the Screen**	>  Top left
+* **Button Activated On**	>  Hover and click
+* **Animate:**			>  Yes
+* **Slide Duration**		>  500 milliseconds (0.5 seconds)
+* **Slide Direction**		>  Left
 
 ***The WordPress Admin Bar***
 
-* **Slide Duration**		> 500 milliseconds (0.5 seconds)
-* **Slide Direction**		> Right
-* **Show Time**			> 5000 milliseconds (5 seconds)
+* **Reserve Space:**		>  No
+* **Animate:**			>  Yes
+* **Slide Duration**		>  500 milliseconds (0.5 seconds)
+* **Slide Direction**		>  Right
+* **Admin Bar Behaviour:**	>  Hide after a defined time
+* **Show Time**			>  5000 milliseconds (5 seconds)
+* **Show the Hide Button:**	>  Yes
 
 = Can I prevent the Admin Bar Button and/or the Admin Bar being animated when it is shown or hidden? =
 
@@ -97,28 +106,29 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 
 == Changelog ==
 
-= 3.0.1 =
-* Bug fixes.
+= 3.1 =
+* Fix an issue where space reserved by the WordPress Admin Bar was still being added.
+* Add a new option to allow the reservation of space by the WordPress Admin Bar if required.
+
+*Please visit the [FAQ tab](http://wordpress.org/plugins/admin-bar-button/faq/ "Admin Bar Button &raquo; "FAQ") if you have questions about the latest features.*
 
 = 3.0 =
 * New 'Hide' button to the Admin Bar.
 * Better control over the animations to show/hide the WordPress Admin Bar and the Admin Bar Button.
 * New menu layout on the settings page in the Admin area.
 
-*Please visit the [FAQ tab](http://wordpress.org/plugins/admin-bar-button/faq/ "Admin Bar Button &raquo; "FAQ") if you have questions about the latest features.*
-
 = 2.2.1 =
 * Fix a z-index issue that was causing the Admin Bar Button to be hidden behind fixed headers
 
 = 2.2 =
 * New option to choose the action upon which Admin Bar Button shows the WordPress Admin Bar; click and hover, click, or hover.
-* The Admin Bar Button can now be positioned bottom left and bottom right, as well as top left and top right; the WordPress Admin Bar will aslo be moved to the bottom if the Admin Bar Button is placed there.
+* The Admin Bar Button can now be positioned bottom left and bottom right, as well as top left and top right; the WordPress Admin Bar will also be moved to the bottom if the Admin Bar Button is placed there.
 * The animation of the Admin Bar Button and the Admin Bar being shown/hidden is now optional.
 * Added a 'Restore Defaults' button.
 * Contextual help added to the settings page.
 
 = 2.1.1 =
-* Fix error where sometimes the space originally ocupied by the admin bar was still being added to the page.
+* Fix error where sometimes the space originally occupied by the admin bar was still being added to the page.
 
 = 2.1 =
 * **Critical Fix** - Fix a possible JS error when a visitor to the site is not logged in.
@@ -134,7 +144,7 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 * Minor changes to the adminBar jQuery UI widget.
 * Addition of screen shots.
 * Updates to the FAQ's.
-* Important update to the installation instrustions.
+* Important update to the installation instructions.
 
 = 1.0 =
 * First release on the WordPress repository.
