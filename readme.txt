@@ -3,7 +3,7 @@ Contributors: duck__boy
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DPCXL86N299A
 Tags: admin bar, admin, bar, jquery ui, jquery, ui, widget factory, widget, factory, plugin, button, toggle, duck__boy
 Requires at least: 3.8
-Tested up to: 4.0
+Tested up to: 4.1.1
 Stable tag: 3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -106,11 +106,14 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 
 == Changelog ==
 
+= 3.2 =
+* Fix issue of front end scripts/styles being included when not logged in.
+
+*Please visit the [FAQ tab](http://wordpress.org/plugins/admin-bar-button/faq/ "Admin Bar Button &raquo; "FAQ") if you have questions about the latest features.*
+
 = 3.1 =
 * Fix an issue where space reserved by the WordPress Admin Bar was still being added.
 * Add a new option to allow the reservation of space by the WordPress Admin Bar if required.
-
-*Please visit the [FAQ tab](http://wordpress.org/plugins/admin-bar-button/faq/ "Admin Bar Button &raquo; "FAQ") if you have questions about the latest features.*
 
 = 3.0 =
 * New 'Hide' button to the Admin Bar.

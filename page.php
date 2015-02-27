@@ -143,8 +143,10 @@ html { margin-top: 32px !important; }
 	public function on_wp_enqueue_scripts(){
 		
 		/** Enqueue the required scripts/styles */
-		wp_enqueue_script('djg-admin-bar-front', plugins_url('adminBar-front.js?scope=admin-bar-button', __FILE__ ), array('jquery-ui-widget', 'jquery-effects-slide'));
-		wp_enqueue_style('djg-admin-bar-front', plugins_url('adminBar-front.css?scope=admin-bar-button', __FILE__ ));
+		if(is_user_logged_in()) :
+			wp_enqueue_script('djg-admin-bar-front', plugins_url('adminBar-front.js?scope=admin-bar-button', __FILE__ ), array('jquery-ui-widget', 'jquery-effects-slide'));
+			wp_enqueue_style('djg-admin-bar-front', plugins_url('adminBar-front.css?scope=admin-bar-button', __FILE__ ));
+		endif;
 		
 	}
 	
