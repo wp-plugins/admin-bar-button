@@ -125,10 +125,10 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 = 3.2.1 =
 * Add colour options for background and text (including hover) for the Admin Bar Button and the WordPress Admin Bar
 
+*Please visit the [FAQ tab](http://wordpress.org/plugins/admin-bar-button/faq/ "Admin Bar Button &raquo; "FAQ") if you have questions about the latest features.*
+
 = 3.1.1 =
 * Fix issue of front end scripts/styles being included when not logged in.
-
-*Please visit the [FAQ tab](http://wordpress.org/plugins/admin-bar-button/faq/ "Admin Bar Button &raquo; "FAQ") if you have questions about the latest features.*
 
 = 3.1 =
 * Fix an issue where space reserved by the WordPress Admin Bar was still being added.
