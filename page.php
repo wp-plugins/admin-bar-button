@@ -105,36 +105,102 @@ class ABB_Page{
 	 */
 	public function on_admin_bar(){
 		
-		$reserve_space = $this->get_value('bar_reserve_space');
+		$reserve_space =			$this->get_value('bar_reserve_space');
+		$background_colour =		$this->get_value('admin_bar_colour');
+		$background_colour_hover =	$this->get_value('admin_bar_colour_hover');
+		$text_colour =				$this->get_value('text_colour');
+		$text_colour_hover =		$this->get_value('text_colour_hover');
 
 ?>
 <style media="print" type="text/css">
 #wpadminbar { display:none; }
+.djg-admin-bar-button { display:none; }
 </style>
-<?php		
-		if((bool)$reserve_space) :
-?>		
+
+<?php if((bool)$reserve_space) : ?>
+
+<!-- Admin Bar - Reserved Space -->
 <style media="screen" type="text/css">
-html { margin-top: 32px !important; }
-* html body { margin-top: 32px !important; }
-@media screen and ( max-width: 782px ) {
-	html { margin-top: 46px !important; }
-	* html body { margin-top: 46px !important; }
+html{
+	margin-top:	32px !important;
 }
-#wpadminbar{ display: none; }
+* html body{
+	margin-top:	32px !important;
+}
+@media screen and (max-width: 782px){
+	html{
+		margin-top:	46px !important;
+	}
+	* html body{
+		margin-top:	46px !important;
+	}
+}
 </style>
-<?php
-		else :
-?>
-<style>
+
+<?php else : ?>
+
+<!-- Admin Bar - No reserved Space -->
+<style media="screen" type="text/css">
 .admin-bar.masthead-fixed .site-header {
-    top: 0;
+    top:	0; 
 }
-#wpadminbar{ display: none; }
+</style>
+
+<?php endif; ?>
+
+<!-- Admin Bar - Generic -->
+<style media="screen" type="text/css">
+#wpadminbar{
+	background-color:	<?php echo $background_colour; ?> !important;
+	display:			none;
+}
+#wpadminbar:not(.mobile) .ab-top-menu > li:hover > .ab-item{
+	background-color:	<?php echo $background_colour_hover; ?> !important;
+}
+
+#wpadminbar .menupop .ab-sub-wrapper,
+#wpadminbar .shortlink-input{
+	background-color:	<?php echo $background_colour_hover; ?> !important;
+}
+
+#wpadminbar:not(.mobile) .ab-top-menu > li > .ab-item{
+	color:	<?php echo $text_colour; ?> !important;
+}
+#wpadminbar #adminbarsearch:before,
+#wpadminbar .ab-icon:before,
+#wpadminbar .ab-item:before{
+	color:	<?php echo $text_colour; ?> !important;
+}
+#wpadminbar a.ab-item,
+#wpadminbar > #wp-toolbar span.ab-label,
+#wpadminbar > #wp-toolbar span.noticon{
+    color:	<?php echo $text_colour; ?> !important;
+}
+
+#wpadminbar #adminbarsearch:hover:before,
+#wpadminbar > #wp-toolbar a.ab-item:hover span.ab-label,
+#wpadminbar > #wp-toolbar span.noticon:hover{
+	color:	<?php echo $text_colour_hover; ?> !important;
+}
+#wpadminbar > #wp-toolbar a.ab-item:hover,
+#wpadminbar > #wp-toolbar a.ab-item:hover:before,
+#wpadminbar > #wp-toolbar a.ab-item:hover span.ab-icon:before{
+	color:	<?php echo $text_colour_hover; ?> !important;
+}
+</style>
+
+<!-- Admin Bar Button -->
+<style media="screen" type="text/css">
+.djg-admin-bar-button{
+	background-color:	<?php echo $background_colour; ?> !important;
+	color:				<?php echo $text_colour; ?> !important;
+}
+.djg-admin-bar-button:hover{
+	background-color:	<?php echo $background_colour_hover; ?> !important;
+	color:				<?php echo $text_colour_hover; ?> !important;
+}
 </style>
 <?php
-		endif;
-		
 	}
 	
 	/**
@@ -241,14 +307,14 @@ var djg_admin_bar_button = false
 		
 		
 		/*-----------------------------------------------
-		  Admin Bar Button settings
+		  Admin Bar Button
 		-----------------------------------------------*/
 		
 		add_settings_section(
-            'abb_button_section',										// ID
-            __('Admin Bar Button Settings', $this->plugin_text_domain),	// Title
-            false,														// Callback
-            'djg_admin_bar_button'										// Page
+            'abb_button_section',								// ID
+            __('Admin Bar Button', $this->plugin_text_domain),	// Title
+            false,												// Callback
+            'djg_admin_bar_button'								// Page
         );
 		
 		add_settings_field(
@@ -259,7 +325,7 @@ var djg_admin_bar_button = false
             'abb_button_section',							// Section
 			array(											// Args
 				'label_for' => 'text'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -270,7 +336,7 @@ var djg_admin_bar_button = false
             'abb_button_section',
 			array(
 				'label_for' => 'text_direction'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -281,7 +347,7 @@ var djg_admin_bar_button = false
             'abb_button_section',
 			array(
 				'label_for' => 'button_position'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -292,7 +358,7 @@ var djg_admin_bar_button = false
             'abb_button_section',
 			array(
 				'label_for' => 'button_activate'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -303,7 +369,7 @@ var djg_admin_bar_button = false
             'abb_button_section',
 			array(
 				'label_for' => 'button_animate'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -314,7 +380,7 @@ var djg_admin_bar_button = false
             'abb_button_section',
 			array(
 				'label_for' => 'button_duration'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -325,19 +391,19 @@ var djg_admin_bar_button = false
             'abb_button_section',
 			array(
 				'label_for' => 'button_direction'
-			) 
+			)
         );
 		
 		
 		/*-----------------------------------------------
-		  WordPress Admin Bar settings
+		  WordPress Admin Bar
 		-----------------------------------------------*/
 		
 		add_settings_section(
-            'abb_bar_section',												// ID
-            __('WordPress Admin Bar Settings', $this->plugin_text_domain),	// Title
-            false,															// Callback
-            'djg_admin_bar_button'											// Page
+            'abb_bar_section',										// ID
+            __('WordPress Admin Bar', $this->plugin_text_domain),	// Title
+            false,													// Callback
+            'djg_admin_bar_button'									// Page
         );
 		
 		add_settings_field(
@@ -348,7 +414,7 @@ var djg_admin_bar_button = false
             'abb_bar_section',								// Section
 			array(											// Args
 				'label_for' => 'bar_reserve_space'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -359,7 +425,7 @@ var djg_admin_bar_button = false
             'abb_bar_section',							// Section
 			array(										// Args
 				'label_for' => 'bar_animate'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -370,7 +436,7 @@ var djg_admin_bar_button = false
             'abb_bar_section',
 			array(
 				'label_for' => 'bar_duration'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -381,7 +447,7 @@ var djg_admin_bar_button = false
             'abb_bar_section',
 			array(
 				'label_for' => 'bar_direction'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -392,7 +458,7 @@ var djg_admin_bar_button = false
             'abb_bar_section',
 			array(
 				'label_for' => 'bar_shown_behaviour'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -403,7 +469,7 @@ var djg_admin_bar_button = false
             'abb_bar_section',
 			array(
 				'label_for' => 'show_time'
-			) 
+			)
         );
 		
 		add_settings_field(
@@ -414,7 +480,62 @@ var djg_admin_bar_button = false
             'abb_bar_section',
 			array(
 				'label_for' => 'show_hide_button'
-			) 
+			)
+        );
+		
+		add_settings_field(
+            'show_wordpress_menu',
+            __('Show the WordPress Menu', $this->plugin_text_domain),
+            array($this, '_option_show_wordpress_menu'),
+            'djg_admin_bar_button',
+            'abb_bar_section',
+			array(
+				'label_for' => 'show_wordpress_menu'
+			)
+        );
+		
+		
+		/*-----------------------------------------------
+		  WordPress Admin Bar Colours
+		-----------------------------------------------*/
+		
+		add_settings_section(
+            'abb_colours_section',						// ID
+            __('Colours', $this->plugin_text_domain),	// Title
+            false,										// Callback
+            'djg_admin_bar_button'						// Page
+        );
+		
+		add_settings_field(
+            'admin_bar_colour',									// ID
+            __('Background Colour', $this->plugin_text_domain),	// Title
+            array($this, '_option_admin_bar_colour'),			// Callback
+            'djg_admin_bar_button',								// Page
+            'abb_colours_section'
+        );
+		
+		add_settings_field(
+            'admin_bar_colour_hover',
+            __('Background Colour (Hover)', $this->plugin_text_domain),
+            array($this, '_option_admin_bar_colour_hover'),
+            'djg_admin_bar_button',
+            'abb_colours_section'
+        );
+		
+		add_settings_field(
+            'text_colour',
+            __('Text Colour', $this->plugin_text_domain),
+            array($this, '_option_text_colour'),
+            'djg_admin_bar_button',
+            'abb_colours_section'
+        );
+		
+		add_settings_field(
+            'text_colour_hover',
+            __('Text Colour (Hover)', $this->plugin_text_domain),
+            array($this, '_option_text_colour_hover'),
+            'djg_admin_bar_button',
+            'abb_colours_section'
         );
 		
 	}
@@ -463,7 +584,8 @@ var djg_admin_bar_button = false
 	public function on_admin_enqueue_scripts(){
 	
 		/** Enqueue the required scripts/styles */
-		wp_enqueue_script('djg-admin-bar-admin', plugins_url('adminBar-admin.js?scope=admin-bar-button', __FILE__), array('jquery-ui-tabs'));
+		wp_enqueue_style('wp-color-picker');
+		wp_enqueue_script('djg-admin-bar-admin', plugins_url('adminBar-admin.js?scope=admin-bar-button', __FILE__), array('wp-color-picker', 'jquery-ui-tabs'));
 		wp_enqueue_style('djg-admin-bar-admin', plugins_url('adminBar-admin.css?scope=admin-bar-button', __FILE__));
 		
 	}
@@ -602,6 +724,31 @@ var djg_admin_bar_button = false
 			$new_input['show_hide_button'] = (isset($input['show_hide_button'])) ? intval($input['show_hide_button']) : intval($this->defaults['show_hide_button']);
 		endif;
 		
+		/** Show WordPress menu */
+		if(isset($input['show_wordpress_menu'])) :
+			$new_input['show_wordpress_menu'] = (isset($input['show_wordpress_menu'])) ? intval($input['show_wordpress_menu']) : intval($this->defaults['show_wordpress_menu']);
+		endif;
+		
+		/** Bar background colour */
+		if(isset($input['admin_bar_colour'])) :
+			$new_input['admin_bar_colour'] = $this->sanitize_hex($input['admin_bar_colour']);
+		endif;
+		
+		/** Bar background colour (hover) */
+		if(isset($input['admin_bar_colour_hover'])) :
+			$new_input['admin_bar_colour_hover'] = $this->sanitize_hex($input['admin_bar_colour_hover']);
+		endif;
+		
+		/** Text colour */
+		if(isset($input['text_colour'])) :
+			$new_input['text_colour'] = $this->sanitize_hex($input['text_colour']);
+		endif;
+		
+		/** Text colour (hover) */
+		if(isset($input['text_colour_hover'])) :
+			$new_input['text_colour_hover'] = $this->sanitize_hex($input['text_colour_hover']);
+		endif;
+		
         return $new_input;
 		
 	}
@@ -621,20 +768,25 @@ var djg_admin_bar_button = false
 	private function set_defaults(){
 	
 		$this->dafaults = array(
-			'text'					=> __('Admin bar', $this->plugin_text_domain),
-			'text_direction'		=> 'ltr',
-			'button_position'		=> 'top-left',
-			'button_activate'		=> 'both',
-			'button_animate'		=> 'yes',
-			'button_duration'		=> 500,
-			'button_direction'		=> 'left',
-			'bar_reserve_space'		=> 0,
-			'bar_animate'			=> 'yes',
-			'bar_duration'			=> 500,
-			'bar_direction'			=> 'right',
-			'bar_shown_behaviour'	=> 'go',
-			'show_time'				=> 5000,
-			'show_hide_button'		=> 1,
+			'text'						=> __('Admin bar', $this->plugin_text_domain),
+			'text_direction'			=> 'ltr',
+			'button_position'			=> 'top-left',
+			'button_activate'			=> 'both',
+			'button_animate'			=> 'yes',
+			'button_duration'			=> 500,
+			'button_direction'			=> 'left',
+			'bar_reserve_space'			=> 0,
+			'bar_animate'				=> 'yes',
+			'bar_duration'				=> 500,
+			'bar_direction'				=> 'right',
+			'bar_shown_behaviour'		=> 'go',
+			'show_time'					=> 5000,
+			'show_hide_button'			=> 1,
+			'show_wordpress_menu'		=> 1,
+			'admin_bar_colour'			=> '#23282D',
+			'admin_bar_colour_hover'	=> '#32373C',
+			'text_colour'				=> '#9EA3A8',
+			'text_colour_hover'			=> '#00B9EB'
 		);
 		
 	}
@@ -687,6 +839,22 @@ var djg_admin_bar_button = false
 				'stay'	=> __('Always remain open', $this->plugin_text_domain)
 			)
 		);
+		
+	}
+	
+	/**
+	 * Sanitize a hex colour (3 or 6 characters)
+	 *
+	 * @param required string $colour	The colour to check
+	 * @return string					Sanitized colour or default
+	 */
+	private function sanitize_hex($colour){
+	
+		/** Ensure that the hex colour begins with a string */
+		if(!$colour[0] === '#')
+			$colour = '#'.$colour;
+		
+		return (preg_match('/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i', $colour)) ? $colour : $this->defaults['admin_bar_color'];
 		
 	}
 	
@@ -1463,12 +1631,124 @@ var djg_admin_bar_button = false
 	}
 	
 	/**
+	 * Callback for outputting the 'show_wordpress_menu' option
+	 */
+	public function _option_show_wordpress_menu(){
+	
+		$value = $this->get_value('show_wordpress_menu');	// Get the value currently saved for this option
+		$checked = ($value) ? true : false;
+		
+		$this->do_option(
+			'checkbox',				// Option type
+			'show_wordpress_menu',	// ID
+			array(					// Args
+				'name'			=> 'admin_bar_button[show_wordpress_menu]',
+				'checked'		=> $checked,
+				'description'	=> __('Whether or not to include the WordPress menu on the Admin Bar when it is shown.', $this->plugin_text_domain),
+				'tips'			=> array(
+					array(
+						__('Tip', $this->plugin_text_domain),
+						__('You\'ll lose access to all of the links if the WordPress menu is not shown.', $this->plugin_text_domain)
+					)
+				)
+			)
+		);
+		
+	}
+	
+	/**
+	 * Callback for outputting the 'admin_bar_color' option
+	 */
+	public function _option_admin_bar_colour(){
+	
+		$value = $this->get_value('admin_bar_colour');	// Get the value currently saved for this option
+		
+		$this->do_option(
+			'text',				// Option type
+			'admin_bar_colour',	// ID
+			array(				// Args
+				'name'			=> 'admin_bar_button[admin_bar_colour]',
+				'value'			=> $value,
+				'class'			=> 'colour-picker',
+				'description'	=> __('The background colour of the Admin Bar Button and the WordPress Admin Bar', $this->plugin_text_domain)
+			)
+		);
+		
+	}
+	
+	/**
+	 * Callback for outputting the 'admin_bar_colour_hover' option
+	 */
+	public function _option_admin_bar_colour_hover(){
+	
+		$value = $this->get_value('admin_bar_colour_hover');	// Get the value currently saved for this option
+		
+		$this->do_option(
+			'text',						// Option type
+			'admin_bar_colour_hover',	// ID
+			array(						// Args
+				'name'			=> 'admin_bar_button[admin_bar_colour_hover]',
+				'value'			=> $value,
+				'class'			=> 'colour-picker',
+				'description'	=> __('The background hover hover colour of the Admin Bar Button and the WordPress Admin bar.', $this->plugin_text_domain),
+				'tips'			=> array(
+					array(
+						__('Tip', $this->plugin_text_domain),
+						__('Also changes the WordPress Admin Bar sub-menus background colour.', $this->plugin_text_domain)
+					)
+				)
+			)
+		);
+		
+	}
+	
+	/**
+	 * Callback for outputting the 'text_colour' option
+	 */
+	public function _option_text_colour(){
+	
+		$value = $this->get_value('text_colour');	// Get the value currently saved for this option
+		
+		$this->do_option(
+			'text',			// Option type
+			'text_colour',	// ID
+			array(			// Args
+				'name'			=> 'admin_bar_button[text_colour]',
+				'value'			=> $value,
+				'class'			=> 'colour-picker',
+				'description'	=> __('The colour of the text for the Admin Bar Button and the WordPress Admin Bar.', $this->plugin_text_domain)
+			)
+		);
+		
+	}
+	
+	/**
+	 * Callback for outputting the 'text_colour_hover' option
+	 */
+	public function _option_text_colour_hover(){
+	
+		$value = $this->get_value('text_colour_hover');	// Get the value currently saved for this option
+		
+		$this->do_option(
+			'text',					// Option type
+			'text_colour_hover',	// ID
+			array(					// Args
+				'name'			=> 'admin_bar_button[text_colour_hover]',
+				'value'			=> $value,
+				'class'			=> 'colour-picker',
+				'description'	=> __('The hover colour of the text for the Admin Bar Button and the WordPress Admin Bar.', $this->plugin_text_domain)
+			)
+		);
+		
+	}
+	
+	/**
 	 * Get the value of an option, checking first for a saved setting and then taking the default
 	 *
 	 * @param required string $option	The option to get a value for
 	 * @return mixed					The value for the selected option
 	 */
-	private function get_value($option){
+	public function get_value($option){
 	
 		return isset($this->options[$option]) ? $this->options[$option] : $this->dafaults[$option];
 		

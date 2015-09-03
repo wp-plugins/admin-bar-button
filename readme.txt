@@ -3,8 +3,8 @@ Contributors: duck__boy
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DPCXL86N299A
 Tags: admin bar, admin, bar, jquery ui, jquery, ui, widget factory, widget, factory, plugin, button, toggle, duck__boy
 Requires at least: 3.8
-Tested up to: 4.1.1
-Stable tag: 3.1.1
+Tested up to: 4.3
+Stable tag: 3.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,7 +63,14 @@ To do this, simply visit the **Settings** page (*Settings &raquo; Admin Bar Butt
 * **Admin Bar Behaviour:**	>  Whether the WordPress Admin Bar should close automatically after the time defined in 'Show Time', or remain open.
 * **Show Time:**		>  The time (in milliseconds) that the Admin Bar will be visible for, when shown.  The minimum time is 2000 (2 seconds), and setting this option to less than that will result in the default being used.  This option is irrelevant and so ignored if either 'Admin Bar Behaviour' is set to 'Always remain open'.
 * **Show the Hide Button:**	>  Whether or not to show the 'Hide' button on the WordPress Admin Bar.
+* **Show the WordPress Menu:**	>  Whether or not to include the WordPress menu on the Admin Bar when it is shown.
 
+***Colours***
+
+* **Background Colour:**		> The background colour of the Admin Bar Button and the WordPress Admin Bar.
+* **Background Colour (Hover):**	> The background hover hover colour of the Admin Bar Button and the WordPress Admin bar. Also changes the WordPress Admin Bar sub-menus background colour. Note that only the colour of buttons which are hovered will change, not the entire WordPress Admin Bar.
+* **Text Colour:**			> The colour of the text for the Admin Bar Button and the WordPress Admin Bar.
+* **Text Colour (Hover):**		> The hover colour of the text for the Admin Bar Button and the WordPress Admin Bar.
 
 = What are the option defaults? =
 
@@ -86,6 +93,14 @@ To do this, simply visit the **Settings** page (*Settings &raquo; Admin Bar Butt
 * **Admin Bar Behaviour:**	>  Hide after a defined time
 * **Show Time**			>  5000 milliseconds (5 seconds)
 * **Show the Hide Button:**	>  Yes
+* **Show the WordPress menu:**	>  Yes
+
+***Colours***
+
+* **Background Colour:**		> #23282D
+* **Background Colour (Hover):**	> #32373C
+* **Text Colour:**			> #9EA3A8
+* **Text Colour (Hover):**		> #00B9EB
 
 = Can I prevent the Admin Bar Button and/or the Admin Bar being animated when it is shown or hidden? =
 
@@ -103,8 +118,12 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 2. The regular Admin Bar, as shown here, is still available when the Admin Bar Button is clicked on or hovered over.
 3. The 'Admin Bar Buttons' options of the plugin settings page.
 4. The 'WordPress Admin Bar' options of the plugin settings page.
+5. The 'Colours' options of the plugin settings page.
 
 == Changelog ==
+
+= 3.2.1 =
+* Add colour options for background and text (including hover) for the Admin Bar Button and the WordPress Admin Bar
 
 = 3.1.1 =
 * Fix issue of front end scripts/styles being included when not logged in.
