@@ -7,8 +7,19 @@
 
 $ = jQuery.noConflict();
 
+(function($){
+ 
+    /**
+	 * Add Color Picker to all inputs that have the 'colour-picker' class
+	 */
+    $(function() {
+        $('.colour-picker').wpColorPicker();
+    });
+     
+})( jQuery );
+
 $(document).ready(function(){
-	
+
 	$('input[name="delete"]', '#admin-bar-button-page').on('click', function(){
 	
 		var result = confirm('Are you sure you want to restore the default settings?');

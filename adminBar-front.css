@@ -5,13 +5,13 @@
  */
 
 .djg-admin-bar-button{
-	background-color: 	#222222;
-	color: 				#EEEEEE;
+	/** background-color: 	#23282D; -- Now set via admin options */
+	/** color: 				#9EA3A8; -- Now set via admin options */
 	cursor:				pointer;
 }
 .djg-admin-bar-button:hover{
-	background-color:	#333333;
-	color: 				#2EA2CC;
+	/** background-color:	#32373C; -- Now set via admin options */
+	/** color: 				#00B9EB; -- Now set via admin options */
 }
 
 .djg-admin-bar-button .text{
