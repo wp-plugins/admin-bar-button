@@ -173,4 +173,4 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 
 == Upgrade Notice ==
 
-Now includes a 'hide' button, and new options for positioning of the Admin Bar Button, and for disabling the animations.
+Now includes an option to hide the WordPress menu from the Admin Bar, as well as options for changing background and text colours in the Admin Bar Button and the WordPress Admin Bar.
