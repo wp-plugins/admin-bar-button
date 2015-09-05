@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin bar, admin, bar, jquery ui, jquery, ui, widget factory, widget, factory, plugin, button, toggle, duck__boy
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 3.2.1
+Stable tag: 3.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -122,6 +122,9 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 
 == Changelog ==
 
+= 3.2.2 =
+* Include transparency when changing the background and text colours of the Admin Bar Button and the WordPress Admin Bar
+
 = 3.2.1 =
 * Add colour options for background and text (including hover) for the Admin Bar Button and the WordPress Admin Bar
 
@@ -173,4 +176,4 @@ You'll be asked to confirm that you wish to do this, and then all of the default
 
 == Upgrade Notice ==
 
-Now includes an option to hide the WordPress menu from the Admin Bar, as well as options for changing background and text colours in the Admin Bar Button and the WordPress Admin Bar.
+Now includes an option to hide the WordPress menu from the Admin Bar, as well as options for changing background and text colours of the Admin Bar Button and the WordPress Admin Bar (including transparency).

@@ -210,8 +210,8 @@ html{
 		
 		/** Enqueue the required scripts/styles */
 		if(is_user_logged_in()) :
-			wp_enqueue_script('djg-admin-bar-front', plugins_url('adminBar-front.js?scope=admin-bar-button', __FILE__ ), array('jquery-ui-widget', 'jquery-effects-slide'));
-			wp_enqueue_style('djg-admin-bar-front', plugins_url('adminBar-front.css?scope=admin-bar-button', __FILE__ ));
+			wp_enqueue_style('djg-admin-bar-front', plugins_url('css/adminBar-front.css?scope=admin-bar-button', __FILE__ ));
+			wp_enqueue_script('djg-admin-bar-front', plugins_url('js/adminBar-front.js?scope=admin-bar-button', __FILE__ ), array('jquery-ui-widget', 'jquery-effects-slide'));
 		endif;
 		
 	}
@@ -585,8 +585,10 @@ var djg_admin_bar_button = false
 	
 		/** Enqueue the required scripts/styles */
 		wp_enqueue_style('wp-color-picker');
-		wp_enqueue_script('djg-admin-bar-admin', plugins_url('adminBar-admin.js?scope=admin-bar-button', __FILE__), array('wp-color-picker', 'jquery-ui-tabs'));
-		wp_enqueue_style('djg-admin-bar-admin', plugins_url('adminBar-admin.css?scope=admin-bar-button', __FILE__));
+		wp_enqueue_style('abb-colour-picker', plugins_url('css/rgba-color-picker.css?scope=admin-bar-button', __FILE__));
+		wp_enqueue_script('abb-colour-picker', plugins_url('js/rgba-color-picker.js?scope=admin-bar-button', __FILE__), array('jquery','wp-color-picker'), '', true);
+		wp_enqueue_style('abb-admin', plugins_url('css/adminBar-admin.css?scope=admin-bar-button', __FILE__));
+		wp_enqueue_script('abb-admin', plugins_url('js/adminBar-admin.js?scope=admin-bar-button', __FILE__), array('jquery-ui-tabs'));
 		
 	}
 	
@@ -731,22 +733,22 @@ var djg_admin_bar_button = false
 		
 		/** Bar background colour */
 		if(isset($input['admin_bar_colour'])) :
-			$new_input['admin_bar_colour'] = $this->sanitize_hex($input['admin_bar_colour']);
+			$new_input['admin_bar_colour'] = $this->sanitize_hex_rgba($input['admin_bar_colour']);
 		endif;
 		
 		/** Bar background colour (hover) */
 		if(isset($input['admin_bar_colour_hover'])) :
-			$new_input['admin_bar_colour_hover'] = $this->sanitize_hex($input['admin_bar_colour_hover']);
+			$new_input['admin_bar_colour_hover'] = $this->sanitize_hex_rgba($input['admin_bar_colour_hover']);
 		endif;
 		
 		/** Text colour */
 		if(isset($input['text_colour'])) :
-			$new_input['text_colour'] = $this->sanitize_hex($input['text_colour']);
+			$new_input['text_colour'] = $this->sanitize_hex_rgba($input['text_colour']);
 		endif;
 		
 		/** Text colour (hover) */
 		if(isset($input['text_colour_hover'])) :
-			$new_input['text_colour_hover'] = $this->sanitize_hex($input['text_colour_hover']);
+			$new_input['text_colour_hover'] = $this->sanitize_hex_rgba($input['text_colour_hover']);
 		endif;
 		
         return $new_input;
@@ -848,13 +850,13 @@ var djg_admin_bar_button = false
 	 * @param required string $colour	The colour to check
 	 * @return string					Sanitized colour or default
 	 */
-	private function sanitize_hex($colour){
+	private function sanitize_hex_rgba($colour){
 	
 		/** Ensure that the hex colour begins with a string */
 		if(!$colour[0] === '#')
 			$colour = '#'.$colour;
 		
-		return (preg_match('/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i', $colour)) ? $colour : $this->defaults['admin_bar_color'];
+		return (preg_match('/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)|(rgba\(\d+\,\d+\,\d+\,([^\)]+)\))/i', $colour)) ? $colour : $this->defaults['admin_bar_color'];
 		
 	}
 	
@@ -1669,7 +1671,7 @@ var djg_admin_bar_button = false
 			array(				// Args
 				'name'			=> 'admin_bar_button[admin_bar_colour]',
 				'value'			=> $value,
-				'class'			=> 'colour-picker',
+				'class'			=> 'abb-colour-picker',
 				'description'	=> __('The background colour of the Admin Bar Button and the WordPress Admin Bar', $this->plugin_text_domain)
 			)
 		);
@@ -1689,7 +1691,7 @@ var djg_admin_bar_button = false
 			array(						// Args
 				'name'			=> 'admin_bar_button[admin_bar_colour_hover]',
 				'value'			=> $value,
-				'class'			=> 'colour-picker',
+				'class'			=> 'abb-colour-picker',
 				'description'	=> __('The background hover hover colour of the Admin Bar Button and the WordPress Admin bar.', $this->plugin_text_domain),
 				'tips'			=> array(
 					array(
@@ -1715,7 +1717,7 @@ var djg_admin_bar_button = false
 			array(			// Args
 				'name'			=> 'admin_bar_button[text_colour]',
 				'value'			=> $value,
-				'class'			=> 'colour-picker',
+				'class'			=> 'abb-colour-picker',
 				'description'	=> __('The colour of the text for the Admin Bar Button and the WordPress Admin Bar.', $this->plugin_text_domain)
 			)
 		);
@@ -1735,7 +1737,7 @@ var djg_admin_bar_button = false
 			array(					// Args
 				'name'			=> 'admin_bar_button[text_colour_hover]',
 				'value'			=> $value,
-				'class'			=> 'colour-picker',
+				'class'			=> 'abb-colour-picker',
 				'description'	=> __('The hover colour of the text for the Admin Bar Button and the WordPress Admin Bar.', $this->plugin_text_domain)
 			)
 		);
